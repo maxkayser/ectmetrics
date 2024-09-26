@@ -29,7 +29,7 @@ To install the `ectmetrics` library, clone the repository and use pip to install
 ```bash
 git clone https://github.com/maxkayser/ectmetrics
 cd ectmetrics
-pip install -r requirements.txt
+pip install .
 ```
 
 ## Usage example
