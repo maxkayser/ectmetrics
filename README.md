@@ -41,73 +41,16 @@ pip install .
 - <a href="examples/example_eeg_signal_import.ipynb" target="_blank" alt="EEG signal import">EEG signal import</a>
 - <a href="examples/example_ect_metrics_calculation.ipynb" target="_blank" alt="ECT seizure quality metrics calculation">ECT seizure quality metrics calculation</a>
 
-### Simple example
-
-First, import the `ectmetrics` library.
-
-```python
-import ectmetrics
-```
-
-You can now generate a synthetic EEG signal by calling the `generate()` function and specifying its parameters.
+### Quick start
+Here’s a short example of generating an EEG signal and calculating the ECT seizure metrics.
 
 ```python
-from ectmetrics.eeg import generate, plot
-
-# Generate the EEG signal
-eeg = generate(
-    signal_duration = 28,      # Duration of the EEG signal in seconds
-    seizure_duration = 21,     # Duration of the seizure in seconds
-    sampling_frequency = 200,  # Sampling frequency of the signal in Hz
-    eeg_name = 'My EEG'        # Name or identifier for the EEG
-)
-```
-Alternatively, you can import an EEG signal from an EDF or <a href="https://www.edfplus.info/" target="_blank" style="text-decoration: none;">EDF+</a> file (i.e. from GPD).
-
-```python
-from ectmetrics.eeg import import_eeg
-
-# Import the EEG data
-eeg = import_eeg(file_path, name='My EEG')
-```
-
-Let's visualize the EEG
-
-```python
-#Visualize the EEG signals
-plot(eeg)
-```
-
-<img src="assets/ectmetrics-plotted_eeg_signal.png" alt="EEG signal" width="auto" height="260">
-
-
-Now use the `metrics()` function in order to calculate the seizure quality metrics
-
-```python
-from ectmetrics.metrics import metrics
-
-# Calculate the ECT seizure quality metrics
-metrics_results = metrics(eeg)
-```
-
-For easier visualization of the results, represent the output as a DataFrame using the `pandas` library.
-
-```python
-import pandas as pd
-df_metrics = pd.DataFrame(metrics_results).set_index('name')
-df_metrics
-```
-
-<img src="assets/ectmetrics-ect_seizure_quality_metrics.png" alt="ECT seizure quality metrics" width="auto" height="250">
-
-### Complete workflow example
-Here’s a complete example of generating an EEG signal and calculating the seizure metrics.
-
-```python
+# Import the ectmetrics library and it's modules
 import ectmetrics
 from ectmetrics.eeg import generate, plot
 from ectmetrics.metrics import calculate_metrics
 
+# Generate a synthetic EEG signal
 eeg = generate(
     signal_duration=28,
     seizure_duration=21,
@@ -115,6 +58,7 @@ eeg = generate(
     eeg_name='My EEG'
 )
 
+# Calculate the ECT seizure quality metrics
 metrics_results = calculate_metrics(eeg)
 
 metrics_results
