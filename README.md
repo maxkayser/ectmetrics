@@ -78,14 +78,14 @@ Now use the `metrics()` function in order to calculate the seizure quality metri
 from ectmetrics.metrics import metrics
 
 # Calculate the ECT seizure quality metrics
-metrics = metrics(eeg)
+metrics_results = metrics(eeg)
 ```
 
 For easier visualization of the results, represent the output as a DataFrame using the `pandas` library.
 
 ```python
 import pandas as pd
-df_metrics = pd.DataFrame(metrics).set_index('name')
+df_metrics = pd.DataFrame(metrics_results).set_index('name')
 df_metrics
 ```
 
@@ -106,9 +106,9 @@ eeg = generate(
     eeg_name='My EEG'
 )
 
-metrics = calculate_metrics(eeg)
+metrics_results = calculate_metrics(eeg)
 
-metrics
+metrics_results
 ```
 
 

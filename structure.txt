@@ -1,27 +1,27 @@
 EctMetrics
 │
-├── ectmetrics/                   		# Main package directory
-│   ├── __init__.py            	 	# Package initialization file
-│   ├── eeg.py             				# EEG signal processing
-│   └── metrics.py            			# Functions for metric calculations
+├── ectmetrics/                   		          # Main package directory
+│   ├── __init__.py            	 	              # Package initialization file
+│   ├── eeg.py             				          # EEG signal processing
+│   └── metrics.py            			          # Functions for metric calculations
 │
-├── tests/                    				# Directory for tests
-│   ├── __init__.py           			# Test package initialization file
-│   ├── test_eeg.py        			# Tests for signal.py
-│   └── test_metrics.py      		# Tests for metrics.py
+├── tests/                    				      # Directory for tests
+│   ├── __init__.py           			          # Test package initialization file
+│   ├── test_eeg.py        			              # Tests for signal.py
+│   └── test_metrics.py      		              # Tests for metrics.py
 │
-├── examples/                 			# Examples of how to use the library
+├── examples/                 			          # Examples of how to use the library
 │   ├── example_simple.py              	          # Example how to use the basic functions
 │   ├── example_eeg_signal_generation.py          # Example how to generate EEG signals
 │   ├── example_eeg_signal_import.py              # Example how to import EEG signals
 │   └── example_ect_metrics_calculation.ipynb     # Example how to calculate ECT seizure quality metrics
 │
-├── docs/                     				# Documentation
-│   ├── index.md              			# Main documentation file
-│   └── usage.md              		# Usage examples and instructions
+├── docs/                     				      # Documentation
+│   ├── index.md              			          # Main documentation file
+│   └── usage.md              		              # Usage examples and instructions
 │
-├── structure.txt                 		# Project structure
-├── README.md                 		# Project description and instructions
-├── requirements.txt          		# Dependencies for the project
-├── setup.py                  			# Setup script for installation
-└── .gitignore                			# Files and directories to be ignored by Git
+├── structure.txt                 		          # Project structure
+├── README.md                 		              # Project description and instructions
+├── requirements.txt          		              # Dependencies for the project
+├── setup.py                  		        	  # Setup script for installation
+└── .gitignore                		        	  # Files and directories to be ignored by Git
