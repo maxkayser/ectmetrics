@@ -1,0 +1,24 @@
+EctMetrics
+│
+├── ectmetrics/                   		# Main package directory
+│   ├── __init__.py            	 	# Package initialization file
+│   ├── eeg.py             				# EEG signal processing
+│   └── metrics.py            			# Functions for metric calculations
+│
+├── tests/                    				# Directory for tests
+│   ├── __init__.py           			# Test package initialization file
+│   ├── test_eeg.py        			# Tests for signal.py
+│   └── test_metrics.py      		# Tests for metrics.py
+│
+├── examples/                 			# Examples of how to use the library
+│   └── example_usage.py      # Example usage of the functions
+│
+├── docs/                     				# Documentation
+│   ├── index.md              			# Main documentation file
+│   └── usage.md              		# Usage examples and instructions
+│
+├── structure.txt                 		# Project structure
+├── README.md                 		# Project description and instructions
+├── requirements.txt          		# Dependencies for the project
+├── setup.py                  			# Setup script for installation
+└── .gitignore                			# Files and directories to be ignored by Git
