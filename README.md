@@ -91,6 +91,27 @@ df_metrics
 
 <img src="assets/ectmetrics-ect_seizure_quality_metrics.png" alt="ECT seizure quality metrics" width="auto" height="250">
 
+## Complete workflow example
+Here’s a complete example of generating an EEG signal and calculating the seizure metrics.
+
+```python
+import ectmetrics
+from ectmetrics.eeg import generate, plot
+from ectmetrics.metrics import calculate_metrics
+
+eeg = generate(
+    signal_duration=28,
+    seizure_duration=21,
+    sampling_frequency=200,
+    eeg_name='My EEG'
+)
+
+metrics = calculate_metrics(eeg)
+
+metrics
+```
+
+
 ## Running Tests
 
 To run the tests, you will need pytest. Install it via pip if you haven’t already:
