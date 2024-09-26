@@ -595,7 +595,7 @@ def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length,
         print(f"An error occurred during calculation of TTPC: {e}")
         return np.nan
         
-def calculate_metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, seizure_duration=None, frequency_bands=None, debug=False):
+def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, seizure_duration=None, frequency_bands=None, debug=False):
     """
     Main function to calculate various seizure metrics based on the provided indices.
 
