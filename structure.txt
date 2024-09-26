@@ -11,7 +11,10 @@ EctMetrics
 │   └── test_metrics.py      		# Tests for metrics.py
 │
 ├── examples/                 			# Examples of how to use the library
-│   └── example_usage.py      # Example usage of the functions
+│   ├── example_simple.py              	          # Example how to use the basic functions
+│   ├── example_eeg_signal_generation.py          # Example how to generate EEG signals
+│   ├── example_eeg_signal_import.py              # Example how to import EEG signals
+│   └── example_ect_metrics_calculation.ipynb     # Example how to calculate ECT seizure quality metrics
 │
 ├── docs/                     				# Documentation
 │   ├── index.md              			# Main documentation file
