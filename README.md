@@ -66,10 +66,14 @@ metrics_results
 
 <img src="assets/ectmetrics-ect_seizure_quality_metrics.png" alt="ECT Seizure Quality Metrics" height="240">
 
+## Contact Information
+
+For more details, please refer to the [Contact Information](CONTACT.md) file.
+
 
 ## Citing ECTMetrics
 
-For citation information, please refer to the [citations](CITATIONS.md) file in this repository.
+For citation information, please refer to the [citations](CITATIONS.md) file.
 
 
 ## Running Tests
