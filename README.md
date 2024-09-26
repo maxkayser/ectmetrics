@@ -32,7 +32,7 @@ cd ectmetrics
 pip install .
 ```
 
-## Usage example
+## Usage
 
 First, import the `ectmetrics` library.
 
