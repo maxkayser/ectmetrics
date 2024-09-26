@@ -1,0 +1,68 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+*.egg-info/
+MANIFEST
+
+# Virtual environment
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Editor temporary files
+*~
+*.swp
+
+# Python test output
+*.coverage
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# C extensions
+*.so
+
+# Pytest
+.cache/
+
+# Local configuration files
+*.env
+*.local
+*.json
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+test.py
+test.ipynb
