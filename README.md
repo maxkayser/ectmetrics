@@ -24,7 +24,7 @@ ECTMetrics is a Python library for analyzing EEG signals, particularly focusing 
   
 ## Installation
 
-To install the `ectmetrics` library, clone the repository and use pip to install the dependencies:
+To install the `ectmetrics` library, clone the repository and use pip to install the library and it's dependencies:
 
 ```bash
 git clone https://github.com/maxkayser/ectmetrics
