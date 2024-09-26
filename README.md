@@ -35,7 +35,7 @@ pip install .
 ## Usage
 
 ### Usage examples
-
+This section lists various usage examples for the `ectmetrics` library as demonstrated in Jupyter Notebook.
 - <a href="examples/example_simple.ipynb" target="_blank" alt="Simple usage example">Simple usage example</a>
 - <a href="examples/example_eeg_signal_generation.ipynb" target="_blank" alt="EEG signal generatio">EEG signal generation</a>
 - <a href="examples/example_eeg_signal_import.ipynb" target="_blank" alt="EEG signal import">EEG signal import</a>
