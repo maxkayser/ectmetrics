@@ -64,6 +64,9 @@ metrics_results = calculate_metrics(eeg)
 metrics_results
 ```
 
+<img src="assets/ectmetrics-ect_seizure_quality_metrics.png" alt="ECT Seizure Quality Metrics" height="240">
+
+
 ## Citing ECTMetrics
 
 For citation information, please refer to the [citations](CITATIONS.md) file in this repository.
