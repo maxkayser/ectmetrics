@@ -1006,7 +1006,8 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
         {
             'name': 'coh',
             'calculate': True,
-            'channels': [0, 1]
+            'channels': [0, 1],
+            'n_consecutive_segments': 8
         },
         {
             'name': 'ttpc',
@@ -1097,7 +1098,7 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
         elif metric_name == 'coh':
             #!
             #
-            metric['n_consecutive_segments'] = 8
+            #metric['n_consecutive_segments'] = 8
             metric['channel'] = [0, 1]
             
             results.append(metric_coh(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
