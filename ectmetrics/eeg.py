@@ -35,6 +35,31 @@ DEFAULTS = {
     }
 }
 
+"""
+Default settings for EEG signal generation.
+
+This dictionary contains default parameters that can be used to generate 
+simulated EEG signals. Each key represents a specific setting, which can 
+be adjusted according to the needs of the user.
+
+Keys:
+- `signal_duration`: int
+    Total duration of the signal in seconds.
+- `sampling_frequency`: int
+    Sampling rate in Hz.
+- `stim_time`: int
+    Time of stimulation in seconds.
+- `stim_duration_ms`: int
+    Duration of stimulation in milliseconds.
+- `seizure_duration`: int
+    Duration of the seizure in seconds.
+- `add_noise`: bool
+    Whether to add background noise.
+- `immediate_seizure`: bool
+    Whether to start the seizure immediately or after stimulation.
+- `filters`: dict
+    Dictionary specifying which filters to apply.
+"""
 # Define templates
 templates = {
     'eeg': {
@@ -56,24 +81,61 @@ def generate(signal_duration=DEFAULTS['signal_duration'], sampling_frequency=DEF
  
     """
     Generate a simulated EEG signal with optional stimulation, seizure, and postictal phases for two channels.
-    
-    Parameters:
-    - signal_duration: Total duration of the signal in seconds.
-    - sampling_frequency: Sampling rate in Hz.
-    - stim_time: Time of stimulation in seconds.
-    - stim_duration_ms: Duration of stimulation in milliseconds.
-    - seizure_duration: Duration of the seizure in seconds.
-    - add_noise: Whether to add background noise.
-    - immediate_seizure: Whether to start the seizure immediately or after stimulation.
-    - filters: Dictionary specifying which filters to apply {'notch': bool, 'lowpass': bool, 'bandpass': bool}
 
-    Returns:
-    - t: Time array.
-    - eeg_signals: numpy array containing the simulated EEG signals for both channels.
-    - stim_startpoint: Startpoint of stimulation.
-    - seizure_startpoint: Startpoint of seizure.
-    - seizure_endpoint: Endpoint of seizure.
+    Parameters
+    ----------
+    signal_duration : float, optional
+        Total duration of the signal in seconds. Default is ``DEFAULTS['signal_duration']``.
+    sampling_frequency : int, optional
+        Sampling rate in Hz. Default is ``DEFAULTS['sampling_frequency']``.
+    stim_time : float, optional
+        Time of stimulation in seconds. Default is ``DEFAULTS['stim_time']``.
+    stim_duration_ms : int, optional
+        Duration of stimulation in milliseconds. Default is ``DEFAULTS['stim_duration_ms']``.
+    seizure_duration : float, optional
+        Duration of the seizure in seconds. Default is ``DEFAULTS['seizure_duration']``.
+    add_noise : bool, optional
+        Whether to add background noise. Default is ``DEFAULTS['add_noise']``.
+    immediate_seizure : bool, optional
+        Whether to start the seizure immediately or after stimulation. Default is ``DEFAULTS['immediate_seizure']``.
+    filters : dict, optional
+        Dictionary specifying which filters to apply. Filters are defined as follows:
+        - 'bandpass': {'apply': bool, 'options': {'highcut': float, 'lowcut': float}}
+        - 'lowpass': {'apply': bool, 'options': {'cutoff_freq': float}}
+        - 'notch': {'apply': bool, 'options': {'notch_freq': float}}
+        Default is ``DEFAULTS['filters']``.
+    eeg_name : str, optional
+        Name of the EEG file to save, if provided. Default is None.
+
+    Returns
+    -------
+    t : numpy.ndarray
+        Time array corresponding to the EEG signal.
+    eeg_signals : numpy.ndarray
+        2D numpy array containing the simulated EEG signals for both channels.
+    stim_startpoint : int
+        The index where stimulation starts.
+    seizure_startpoint : int
+        The index where the seizure starts.
+    seizure_endpoint : int
+        The index where the seizure ends.
+
+    Notes
+    -----
+    The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal). 
+    Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the 
+    `filters` dictionary.
+
+    Example
+    -------
+    >>> eeg.generate(signal_duration=28, sampling_frequency=200, stim_time=5, 
+                     stim_duration_ms=500, seizure_duration=10, add_noise=True, 
+                     immediate_seizure=False, filters={'bandpass': {'apply': True, 
+                     'options': {'highcut': 40, 'lowcut': 1}}, 'lowpass': {'apply': True, 
+                     'options': {'cutoff_freq': 30}}, 'notch': {'apply': True, 
+                     'options': {'notch_freq': 60}}}, eeg_name='example_eeg')
     """
+    
     t = np.arange(0, signal_duration, 1/sampling_frequency)  # Time axis
     signal1 = np.zeros_like(t)  # Initialize signal for channel 1
     signal2 = np.zeros_like(t)  # Initialize signal for channel 2
@@ -286,12 +348,45 @@ def import_eeg(file_path, name=None):
     """
     Import EEG data from an EDF file and return it as a dictionary.
 
-    Parameters:
-    - file_path: str, path to the EDF file.
-    - name: str, optional, name for the EEG data. If None, uses the first signal label from the file.
+    Parameters
+    ----------
+    file_path : str
+        The path to the EDF file containing the EEG data.
+    name : str, optional
+        Name for the EEG data. If None, the first signal label from the file will be used as the name.
 
-    Returns:
-    - eeg: dict, a dictionary containing the EEG data.
+    Returns
+    -------
+    eeg : dict
+        A dictionary containing the EEG data with the following keys:
+        - 'name' : str
+            The name assigned to the EEG data (either provided or the first signal label).
+        - 'signals' : numpy.ndarray
+            A 2D array containing the EEG signal data for all channels (shape: [n_channels, n_samples]).
+        - 'channels' : list of int
+            A list of channel indices corresponding to the signals.
+        - 'x-axis' : numpy.ndarray
+            Time vector corresponding to the EEG signal data.
+        - 'sampling_frequency' : float
+            The sampling frequency of the EEG signals in Hz.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the specified `file_path` does not exist.
+    ValueError
+        If the EDF file is invalid or does not contain EEG data.
+
+    Notes
+    -----
+    This function requires the `pyedflib` library to read EDF files. Ensure that the library is installed 
+    in your environment. The time vector is generated based on the number of samples and the sampling frequency.
+
+    Examples
+    --------
+    >>> eeg = import_eeg('path/to/eeg_data.edf')
+    >>> print(eeg['signals'])  # Access the EEG signal data
+    >>> print(eeg['sampling_frequency'])  # Access the sampling frequency
     """
     # Open the EDF file
     with pyedflib.EdfReader(file_path) as f:
@@ -326,12 +421,54 @@ def import_eeg(file_path, name=None):
    
 
 def plot(eeg, metrics=None):
+
     """
     Plot two-channel EEG signals with stimulation and seizure markers.
 
-    Parameters:
-    - eeg: Dictionary containing EEG data with keys 'name', 'signals', 'x-axis', 
-            'stim_startpoint', 'seizure_startpoint', and 'seizure_endpoint'.
+    Parameters
+    ----------
+    eeg : dict
+        A dictionary containing EEG data with the following keys:
+        - 'name' : str
+            The name of the EEG dataset.
+        - 'signals' : numpy.ndarray
+            A 2D array containing EEG signal data for all channels (shape: [n_channels, n_samples]).
+        - 'x-axis' : numpy.ndarray
+            Time vector corresponding to the EEG signal data.
+        - 'timepoints' : dict
+            A dictionary containing the following keys:
+            - 'stim_startpoint' : int
+                The sample index where stimulation starts.
+            - 'seizure_startpoint' : int
+                The sample index where the seizure starts.
+            - 'seizure_endpoint' : int
+                The sample index where the seizure ends.
+        - 'sampling_frequency' : float
+            The sampling frequency of the EEG signals in Hz.
+
+    metrics : list of dict, optional
+        A list of metrics to plot on the EEG signals. Each metric dictionary should contain:
+        - 'name' : str
+            The name of the metric.
+        - 'timepoints' : dict
+            A dictionary with either of the following:
+            - 'startpoint' : int
+                The sample index where the metric starts.
+            - 'endpoint' : int
+                The sample index where the metric ends.
+            - 'timepoint' : int
+                The sample index of a specific point in time related to the metric.
+
+    Example
+    -------
+    >>> eeg_data = import_eeg('path/to/eeg_data.edf')  # Assuming this function is defined
+    >>> metrics = [{'name': 'Metric 1', 'timepoints': {'startpoint': 500, 'endpoint': 600}}]
+    >>> plot(eeg_data, metrics)
+
+    Notes
+    -----
+    This function requires the `matplotlib` library for plotting. Ensure that the library is installed 
+    in your environment.
     """
 
     name = eeg.get('name')

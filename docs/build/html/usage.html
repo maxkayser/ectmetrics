@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Usage &#8212; ECTMetrics  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to ECTMetrics’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to ECTMetrics’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECTMetrics  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Usage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<p>To use Lumache, first install it using pip:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(.venv)</span> <span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>lumache
+</pre></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="eeg.generate">
+<span class="sig-prename descclassname"><span class="pre">eeg.</span></span><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">28</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stim_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stim_duration_ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">immediate_seizure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'bandpass':</span> <span class="pre">{'apply':</span> <span class="pre">True,</span> <span class="pre">'options':</span> <span class="pre">{'highcut':</span> <span class="pre">40,</span> <span class="pre">'lowcut':</span> <span class="pre">1}},</span> <span class="pre">'lowpass':</span> <span class="pre">{'apply':</span> <span class="pre">True,</span> <span class="pre">'options':</span> <span class="pre">{'cutoff_freq':</span> <span class="pre">30}},</span> <span class="pre">'notch':</span> <span class="pre">{'apply':</span> <span class="pre">True,</span> <span class="pre">'options':</span> <span class="pre">{'notch_freq':</span> <span class="pre">60}}}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eeg.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a simulated EEG signal with optional stimulation, seizure, and postictal phases for two channels.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>signal_duration<span class="classifier">float, optional</span></dt><dd><p>Total duration of the signal in seconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['signal_duration']</span></code>.</p>
+</dd>
+<dt>sampling_frequency<span class="classifier">int, optional</span></dt><dd><p>Sampling rate in Hz. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['sampling_frequency']</span></code>.</p>
+</dd>
+<dt>stim_time<span class="classifier">float, optional</span></dt><dd><p>Time of stimulation in seconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['stim_time']</span></code>.</p>
+</dd>
+<dt>stim_duration_ms<span class="classifier">int, optional</span></dt><dd><p>Duration of stimulation in milliseconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['stim_duration_ms']</span></code>.</p>
+</dd>
+<dt>seizure_duration<span class="classifier">float, optional</span></dt><dd><p>Duration of the seizure in seconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['seizure_duration']</span></code>.</p>
+</dd>
+<dt>add_noise<span class="classifier">bool, optional</span></dt><dd><p>Whether to add background noise. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['add_noise']</span></code>.</p>
+</dd>
+<dt>immediate_seizure<span class="classifier">bool, optional</span></dt><dd><p>Whether to start the seizure immediately or after stimulation. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['immediate_seizure']</span></code>.</p>
+</dd>
+<dt>filters<span class="classifier">dict, optional</span></dt><dd><p>Dictionary specifying which filters to apply. Filters are defined as follows:
+- ‘bandpass’: {‘apply’: bool, ‘options’: {‘highcut’: float, ‘lowcut’: float}}
+- ‘lowpass’: {‘apply’: bool, ‘options’: {‘cutoff_freq’: float}}
+- ‘notch’: {‘apply’: bool, ‘options’: {‘notch_freq’: float}}
+Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['filters']</span></code>.</p>
+</dd>
+<dt>eeg_name<span class="classifier">str, optional</span></dt><dd><p>Name of the EEG file to save, if provided. Default is None.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>t<span class="classifier">numpy.ndarray</span></dt><dd><p>Time array corresponding to the EEG signal.</p>
+</dd>
+<dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>2D numpy array containing the simulated EEG signals for both channels.</p>
+</dd>
+<dt>stim_startpoint<span class="classifier">int</span></dt><dd><p>The index where stimulation starts.</p>
+</dd>
+<dt>seizure_startpoint<span class="classifier">int</span></dt><dd><p>The index where the seizure starts.</p>
+</dd>
+<dt>seizure_endpoint<span class="classifier">int</span></dt><dd><p>The index where the seizure ends.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h3>
+<p>The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal). 
+Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the 
+<cite>filters</cite> dictionary.</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">signal_duration</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">stim_time</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+<span class="go">                 stim_duration_ms=500, seizure_duration=10, add_noise=True, </span>
+<span class="go">                 immediate_seizure=False, filters={&#39;bandpass&#39;: {&#39;apply&#39;: True, </span>
+<span class="go">                 &#39;options&#39;: {&#39;highcut&#39;: 40, &#39;lowcut&#39;: 1}}, &#39;lowpass&#39;: {&#39;apply&#39;: True, </span>
+<span class="go">                 &#39;options&#39;: {&#39;cutoff_freq&#39;: 30}}, &#39;notch&#39;: {&#39;apply&#39;: True, </span>
+<span class="go">                 &#39;options&#39;: {&#39;notch_freq&#39;: 60}}}, eeg_name=&#39;example_eeg&#39;)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<span class="target" id="module-eeg"></span><dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">eeg.</span></span><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">28</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stim_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stim_duration_ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_noise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">immediate_seizure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'bandpass':</span> <span class="pre">{'apply':</span> <span class="pre">True,</span> <span class="pre">'options':</span> <span class="pre">{'highcut':</span> <span class="pre">40,</span> <span class="pre">'lowcut':</span> <span class="pre">1}},</span> <span class="pre">'lowpass':</span> <span class="pre">{'apply':</span> <span class="pre">True,</span> <span class="pre">'options':</span> <span class="pre">{'cutoff_freq':</span> <span class="pre">30}},</span> <span class="pre">'notch':</span> <span class="pre">{'apply':</span> <span class="pre">True,</span> <span class="pre">'options':</span> <span class="pre">{'notch_freq':</span> <span class="pre">60}}}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a simulated EEG signal with optional stimulation, seizure, and postictal phases for two channels.</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>signal_duration<span class="classifier">float, optional</span></dt><dd><p>Total duration of the signal in seconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['signal_duration']</span></code>.</p>
+</dd>
+<dt>sampling_frequency<span class="classifier">int, optional</span></dt><dd><p>Sampling rate in Hz. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['sampling_frequency']</span></code>.</p>
+</dd>
+<dt>stim_time<span class="classifier">float, optional</span></dt><dd><p>Time of stimulation in seconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['stim_time']</span></code>.</p>
+</dd>
+<dt>stim_duration_ms<span class="classifier">int, optional</span></dt><dd><p>Duration of stimulation in milliseconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['stim_duration_ms']</span></code>.</p>
+</dd>
+<dt>seizure_duration<span class="classifier">float, optional</span></dt><dd><p>Duration of the seizure in seconds. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['seizure_duration']</span></code>.</p>
+</dd>
+<dt>add_noise<span class="classifier">bool, optional</span></dt><dd><p>Whether to add background noise. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['add_noise']</span></code>.</p>
+</dd>
+<dt>immediate_seizure<span class="classifier">bool, optional</span></dt><dd><p>Whether to start the seizure immediately or after stimulation. Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['immediate_seizure']</span></code>.</p>
+</dd>
+<dt>filters<span class="classifier">dict, optional</span></dt><dd><p>Dictionary specifying which filters to apply. Filters are defined as follows:
+- ‘bandpass’: {‘apply’: bool, ‘options’: {‘highcut’: float, ‘lowcut’: float}}
+- ‘lowpass’: {‘apply’: bool, ‘options’: {‘cutoff_freq’: float}}
+- ‘notch’: {‘apply’: bool, ‘options’: {‘notch_freq’: float}}
+Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS['filters']</span></code>.</p>
+</dd>
+<dt>eeg_name<span class="classifier">str, optional</span></dt><dd><p>Name of the EEG file to save, if provided. Default is None.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>t<span class="classifier">numpy.ndarray</span></dt><dd><p>Time array corresponding to the EEG signal.</p>
+</dd>
+<dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>2D numpy array containing the simulated EEG signals for both channels.</p>
+</dd>
+<dt>stim_startpoint<span class="classifier">int</span></dt><dd><p>The index where stimulation starts.</p>
+</dd>
+<dt>seizure_startpoint<span class="classifier">int</span></dt><dd><p>The index where the seizure starts.</p>
+</dd>
+<dt>seizure_endpoint<span class="classifier">int</span></dt><dd><p>The index where the seizure ends.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Notes<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p>The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal). 
+Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the 
+<cite>filters</cite> dictionary.</p>
+</section>
+<section id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">signal_duration</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">stim_time</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+<span class="go">                 stim_duration_ms=500, seizure_duration=10, add_noise=True, </span>
+<span class="go">                 immediate_seizure=False, filters={&#39;bandpass&#39;: {&#39;apply&#39;: True, </span>
+<span class="go">                 &#39;options&#39;: {&#39;highcut&#39;: 40, &#39;lowcut&#39;: 1}}, &#39;lowpass&#39;: {&#39;apply&#39;: True, </span>
+<span class="go">                 &#39;options&#39;: {&#39;cutoff_freq&#39;: 30}}, &#39;notch&#39;: {&#39;apply&#39;: True, </span>
+<span class="go">                 &#39;options&#39;: {&#39;notch_freq&#39;: 60}}}, eeg_name=&#39;example_eeg&#39;)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="eeg.import_eeg">
+<span class="sig-prename descclassname"><span class="pre">eeg.</span></span><span class="sig-name descname"><span class="pre">import_eeg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eeg.import_eeg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import EEG data from an EDF file and return it as a dictionary.</p>
+<p>Parameters:
+- file_path: str, path to the EDF file.
+- name: str, optional, name for the EEG data. If None, uses the first signal label from the file.</p>
+<p>Returns:
+- eeg: dict, a dictionary containing the EEG data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="eeg.plot">
+<span class="sig-prename descclassname"><span class="pre">eeg.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eeg.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot two-channel EEG signals with stimulation and seizure markers.</p>
+<p>Parameters:
+- eeg: Dictionary containing EEG data with keys ‘name’, ‘signals’, ‘x-axis’,</p>
+<blockquote>
+<div><p>‘stim_startpoint’, ‘seizure_startpoint’, and ‘seizure_endpoint’.</p>
+</div></blockquote>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#eeg.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li><a class="reference internal" href="#eeg.import_eeg"><code class="docutils literal notranslate"><span class="pre">import_eeg()</span></code></a></li>
+<li><a class="reference internal" href="#eeg.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Welcome to ECTMetrics’s documentation!</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/usage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to ECTMetrics’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECTMetrics  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Usage</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Max Kayser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>

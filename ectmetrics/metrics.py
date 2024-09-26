@@ -8,19 +8,50 @@ DEFAULTS = {
 }
 
 def calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint, seizure_endpoint, debug=False):
+
     """
-    Calculate the Average Seizure Energy Index (ASEI) for a given signal.
-    
+    Calculate the Average Seizure Energy Index (ASEI) for a given EEG signal.
+
+    This function computes the Average Seizure Energy Index (ASEI) based on the provided EEG signals,
+    focusing on a specified channel during a seizure event.
+
     Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: float - Sampling frequency of the EEG signal in Hz.
-    seizure_startpoint: float - Start point of the seizure in seconds.
-    seizure_endpoint: float - End point of the seizure in seconds.
-    debug: bool - If True, print debug information.
-    
+    ----------------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    sampling_frequency : float
+        The sampling frequency of the EEG signal in Hz.
+    seizure_startpoint : float
+        The start point of the seizure in seconds.
+    seizure_endpoint : float
+        The end point of the seizure in seconds.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
     Returns:
-    dict: A dictionary containing the calculated ASEI metric.
+    -----------
+    dict
+        A dictionary containing the calculated ASEI metric, including:
+        - name: The name of the metric ('asei').
+        - value: The calculated ASEI value.
+        - timepoints: A dictionary with the start and end points of the seizure.
+        - unit: The unit of measurement ('μV²').
+        - description: A brief description of the metric.
+    
+    Raises:
+    ----------
+    Exception
+        If an error occurs during the calculation, an error message is printed,
+        and None is returned.
+
+    Examples:
+    --------------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> result = calculate_asei(eeg_data, eeg_channel=0, sampling_frequency=256,
+    ...                          seizure_startpoint=1.0, seizure_endpoint=2.0, debug=True)
+    >>> print(result)
     """
     
     if debug:
@@ -62,20 +93,53 @@ def calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpo
 def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, asei=None, debug=False):
 
     """
-    Calculate the Seizure Energy Index (SEI) based on the ASEI.
+    Calculate the Seizure Energy Index (SEI) based on the Average Seizure Energy Index (ASEI).
     
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: float - Sampling frequency of the EEG signal in Hz.
-    segment_length: float - Length of the segment in seconds.
-    seizure_startpoint: float - Start point of the seizure in seconds.
-    seizure_endpoint: float - End point of the seizure in seconds.
-    asei: float - Average Seizure Energy Index in microvolts squared.
-    debug: bool - If True, print debug information.
-    
-    Returns:
-    dict: A dictionary containing the calculated SEI metric.
+    This function computes the SEI for a specified EEG channel during a seizure event,
+    utilizing the ASEI to quantify the energy associated with the seizure duration.
+
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    sampling_frequency : float
+        The sampling frequency of the EEG signal in Hz.
+    segment_length : float
+        The length of the segment in seconds (used for potential future extensions).
+    seizure_startpoint : float
+        The start point of the seizure in seconds.
+    seizure_endpoint : float
+        The end point of the seizure in seconds.
+    asei : float, optional
+        The Average Seizure Energy Index in microvolts squared. If not provided, it will be calculated.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated SEI metric, including:
+        - name: The name of the metric ('sei').
+        - value: The calculated SEI value.
+        - timepoints: A dictionary with the start and end points of the seizure.
+        - unit: The unit of measurement ('μV²·s').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    Exception
+        If an error occurs during the calculation, an error message is printed,
+        and None is returned.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> sei_result = calculate_sei(eeg_data, eeg_channel=0, sampling_frequency=256,
+    ...                            segment_length=2.0, seizure_startpoint=1.0,
+    ...                            seizure_endpoint=3.0, asei=10.0, debug=True)
+    >>> print(sei_result)
     """
     
     if debug:
@@ -137,18 +201,47 @@ def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
 
 def calculate_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_endpoint, debug=False):
     """
-    Calculate the Postictal Suppression Index (PSI) for a given signal.
+    Calculate the Postictal Suppression Index (PSI) for a given EEG signal.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: float - Sampling frequency of the EEG signal in Hz.
-    segment_length: int - Length of each segment in samples.
-    seizure_endpoint: float - End time of the seizure in seconds.
-    debug: bool - If True, print debug information.
+    The PSI quantifies the level of suppression in the EEG signal following a seizure, 
+    comparing the amplitude of ictal (during the seizure) and non-ictal (after the seizure) segments.
 
-    Returns:
-    dict: A dictionary containing the calculated PSI metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    sampling_frequency : float
+        The sampling frequency of the EEG signal in Hz.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_endpoint : float
+        The end time of the seizure in seconds.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated PSI metric, including:
+        - name: The name of the metric ('psi').
+        - value: The calculated PSI value.
+        - timepoints: A dictionary with the start and end points of the calculation.
+        - unit: The unit of measurement ('%').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If calculated indices are out of bounds of the EEG signal.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> psi_result = calculate_psi(eeg_data, eeg_channel=0, sampling_frequency=256,
+    ...                           segment_length=64, seizure_endpoint=3.0, debug=True)
+    >>> print(psi_result)
     """
     
     if debug:
@@ -202,19 +295,48 @@ def calculate_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
 def calculate_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, seizure_endpoint, debug=False):
 
     """
-    Calculate the Early Ictal Amplitude (EIA)
+    Calculate the Early Ictal Amplitude (EIA) for a given EEG signal segment.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    segment_length: int - Length of each segment in samples.
-    seizure_startpoint: int - The startpoint of the seizure in samples.
-    seizure_endpoint: float - End time of the seizure in seconds.
-    debug: bool - If True, print debug information.
+    The EIA represents the average absolute amplitude of the first eight segments of the seizure.
 
-    Returns:
-    dict: A dictionary containing the calculated EIA metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_startpoint : int
+        The start point of the seizure in samples.
+    seizure_endpoint : float
+        The end time of the seizure in seconds.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated EIA metric, including:
+        - name: The name of the metric ('eia').
+        - value: The calculated EIA value.
+        - timepoints: A dictionary with the start and end points of the calculation.
+        - unit: The unit of measurement ('μV').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If the seizure segment is less than eight segments long.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> eia_result = calculate_eia(eeg_data, eeg_channel=0, segment_length=64,
+    ...                            seizure_startpoint=50, seizure_endpoint=3.0, debug=True)
+    >>> print(eia_result)
     """
+    
 
     if debug:
         print("Calculating EIA...")
@@ -255,19 +377,49 @@ def calculate_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
 def calculate_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, seizure_endpoint, debug=False):
 
     """
-    Calculate the Midictal Amplitude (MIA)
+    Calculate the Midictal Amplitude (MIA) for a given EEG signal segment.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    segment_length: int - Length of each segment in samples.
-    seizure_startpoint: int - The startpoint of the seizure in samples.
-    seizure_endpoint: float - End time of the seizure in seconds.
-    debug: bool - If True, print debug information.
+    The MIA represents the maximum average absolute amplitude of sequences of eight segments 
+    within the seizure period.
 
-    Returns:
-    dict: A dictionary containing the calculated MIA metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_startpoint : int
+        The start point of the seizure in samples.
+    seizure_endpoint : float
+        The end time of the seizure in seconds.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated MIA metric, including:
+        - name: The name of the metric ('mia').
+        - value: The calculated MIA value.
+        - timepoints: A dictionary with the start and end points of the calculation.
+        - unit: The unit of measurement ('μV').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If the seizure segment is less than eight segments long or if no valid amplitudes can be calculated.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> mia_result = calculate_mia(eeg_data, eeg_channel=0, segment_length=64,
+    ...                            seizure_startpoint=50, seizure_endpoint=3.0, debug=True)
+    >>> print(mia_result)
     """
+    
     
     if debug:
         print("Calculating MIA...")
@@ -319,21 +471,56 @@ def calculate_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
 def calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, debug=False):
 
     """
-    Calculate the Maximum Sustained Power (MSP)
+    Calculate the Maximum Sustained Power (MSP) of EEG signals within a specified seizure segment.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: int, optional - The sampling frequency of the signal.
-    segment_length: int - Length of each segment in samples.
-    seizure_startpoint: int - The startpoint of the seizure in samples.
-    seizure_endpoint: float - End time of the seizure in seconds.
-    frequency_bands: dict - Dictionary containing frequency bands for FFT power calculation.
-    debug: bool - If True, print debug information.
+    The MSP represents the maximum average power over consecutive segments during a seizure, 
+    calculated using the Fast Fourier Transform (FFT).
 
-    Returns:
-    dict: A dictionary containing the calculated MSP metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    sampling_frequency : int
+        The sampling frequency of the signal in Hz.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_startpoint : int
+        The start point of the seizure in samples.
+    seizure_endpoint : float
+        The end time of the seizure in seconds.
+    frequency_bands : dict
+        A dictionary containing frequency bands for FFT power calculation, with keys as band names 
+        and values as tuples defining the frequency range (e.g., {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}).
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated MSP metric, including:
+        - name: The name of the metric ('msp').
+        - value: The calculated MSP value.
+        - timepoints: A dictionary with the start and end points of the calculation.
+        - unit: The unit of measurement ('μV²/Hz').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If the seizure segment is less than eight segments long or if no valid power values can be calculated.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> frequency_bands = {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}
+    >>> msp_result = calculate_msp(eeg_data, eeg_channel=0, sampling_frequency=256,
+    ...                             segment_length=64, seizure_startpoint=50, seizure_endpoint=3.0,
+    ...                             frequency_bands=frequency_bands, debug=True)
+    >>> print(msp_result)
     """
+    
 
     if debug:
         print("Calculating MSP...")
@@ -397,23 +584,60 @@ def calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
 def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, msp_startpoint=None,  msp_endpoint=None,debug=False):
     
     """
-    Calculate the Maximum Sustained Power (MSP)
+    Calculate the Time to Peak Power (TTPP) for EEG signals during a seizure.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: int, optional - The sampling frequency of the signal.
-    segment_length: int - Length of each segment in samples.
-    seizure_startpoint: int - The startpoint of the seizure in samples.
-    seizure_endpoint: float - End time of the seizure in seconds.
-    frequency_bands: dict - Dictionary containing frequency bands for FFT power calculation.
-    msp_startpoint: int - Startpoint of maximum sustained supression sample
-    msp_endpoint: int - Endpoint of maximum sustained supression sample
-    debug: bool - If True, print debug information.
+    TTPP is the time taken to reach the peak power during a seizure event, 
+    calculated based on the Maximum Sustained Power (MSP).
 
-    Returns:
-    dict: A dictionary containing the calculated TTPP metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : int
+        The index of the EEG channel to analyze.
+    sampling_frequency : int
+        The sampling frequency of the signal in Hz.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_startpoint : int
+        The start point of the seizure in samples.
+    seizure_endpoint : float
+        The end time of the seizure in seconds.
+    frequency_bands : dict
+        A dictionary containing frequency bands for FFT power calculation, with keys as band names 
+        and values as tuples defining the frequency range (e.g., {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}).
+    msp_startpoint : int, optional
+        Start point of the maximum sustained suppression sample; if None, it will be calculated.
+    msp_endpoint : int, optional
+        Endpoint of the maximum sustained suppression sample; if None, it will be calculated.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated TTPP metric, including:
+        - name: The name of the metric ('ttpp').
+        - value: The calculated TTPP value in seconds.
+        - timepoints: A dictionary with the timepoint of TTPP in samples.
+        - unit: The unit of measurement ('s').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If the MSP start point or endpoint values are invalid or if an error occurs during the MSP calculation.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
+    >>> frequency_bands = {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}
+    >>> ttpp_result = calculate_ttpp(eeg_data, eeg_channel=0, sampling_frequency=256,
+    ...                               segment_length=64, seizure_startpoint=50, seizure_endpoint=3.0,
+    ...                               frequency_bands=frequency_bands, debug=True)
+    >>> print(ttpp_result)
     """
+    
 
     if debug:
         print("Calculating TPPP...")
@@ -458,19 +682,49 @@ def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length,
 def calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug=False):
  
     """
-    Calculate the Maximum Sustained Coherence (COH)
+    Calculate the Maximum Sustained Coherence (COH) between two EEG channels during a seizure.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: float - Sampling frequency of the EEG signal in Hz.
-    segment_length: int - Length of the segment in samples.
-    seizure_startpoint: int - The start index of the seizure segment.
-    n_consecutive_segments: int - Number of consecutive segments to consider.
-    debug: bool - If True, print debug information.
+    COH measures the degree of synchronization between the EEG signals of two channels over specified segments,
+    focusing on the delta frequency band (0.78 - 3.5 Hz).
 
-    Returns:
-    dict: A dictionary containing the calculated COH metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : list[int]
+        A list containing the indices of the two EEG channels to analyze.
+    sampling_frequency : float
+        The sampling frequency of the EEG signals in Hz.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_startpoint : int
+        The start index of the seizure segment in samples.
+    n_consecutive_segments : int
+        Number of consecutive segments to consider for coherence calculation.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated COH metric, including:
+        - name: The name of the metric ('coh').
+        - value: The maximum sustained coherence value as a percentage.
+        - timepoints: A dictionary with start and end points of the coherence measurement in samples.
+        - unit: The unit of measurement ('%').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If the signal is shorter than the required number of segments or if COH cannot be calculated.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data for 2 channels
+    >>> coherence_result = calculate_coh(eeg_data, eeg_channel=[0, 1], sampling_frequency=256,
+    ...                                    segment_length=64, seizure_startpoint=50, n_consecutive_segments=4, debug=True)
+    >>> print(coherence_result)
     """
     
     if debug:
@@ -541,23 +795,54 @@ def calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
 def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, coh_startpoint=None, coh_endpoint=None, debug=False):
 
     """
-    Calculate the Time to Peak Coherence (TTPC)
+    Calculate the Time to Peak Coherence (TTPC) during a seizure segment.
 
-    Parameters:
-    eeg_signals: numpy.ndarray - A 2D numpy array containing the EEG signals.
-    eeg_channel: int - The channel index to analyze.
-    sampling_frequency: float - Sampling frequency of the EEG signal in Hz.
-    segment_length: int - Length of the segment in samples.
-    seizure_startpoint: int - The start index of the seizure segment.
-    seizure_endpoint: int - The end index of the seizure segment.
-    n_consecutive_segments: int - Number of consecutive segments to consider.
-    coh_startpoint: int - The startpoint of coherence measurement.
-    coh_endpoint: int - The endpoint of coherence measurement.
-    debug: bool - If True, print debug information (default is False).
+    TTPC is defined as the time taken to reach the peak coherence value between two EEG channels.
 
-    Returns:
-    dict: A dictionary containing the calculated TTPC metric.
+    Parameters
+    ----------
+    eeg_signals : numpy.ndarray
+        A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.
+    eeg_channel : list[int]
+        A list containing the indices of the two EEG channels to analyze.
+    sampling_frequency : float
+        The sampling frequency of the EEG signals in Hz.
+    segment_length : int
+        Length of each segment in samples.
+    seizure_startpoint : int
+        The start index of the seizure segment in samples.
+    n_consecutive_segments : int
+        Number of consecutive segments to consider for coherence calculation.
+    coh_startpoint : int, optional
+        The startpoint of coherence measurement. If not provided, will be calculated from coherence results.
+    coh_endpoint : int, optional
+        The endpoint of coherence measurement. If not provided, will be calculated from coherence results.
+    debug : bool, optional
+        If True, prints debug information (default is False).
+
+    Returns
+    -------
+    dict
+        A dictionary containing the calculated TTPC metric, including:
+        - name: The name of the metric ('ttpc').
+        - value: The time to peak coherence in seconds.
+        - timepoints: A dictionary with the calculated timepoint in samples.
+        - unit: The unit of measurement ('s').
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If the coherence startpoint or endpoint values are invalid or cannot be calculated.
+
+    Examples
+    --------
+    >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data for 2 channels
+    >>> ttp_result = calculate_ttpc(eeg_data, eeg_channel=[0, 1], sampling_frequency=256,
+    ...                              segment_length=64, seizure_startpoint=50, n_consecutive_segments=4, debug=True)
+    >>> print(ttp_result)
     """
+    
     try:
     
         # Validate coh_startpoint and coh_endpoint
@@ -597,18 +882,52 @@ def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length,
         
 def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, seizure_duration=None, frequency_bands=None, debug=False):
     """
-    Main function to calculate various seizure metrics based on the provided indices.
+    Main function to calculate various seizure metrics based on the provided EEG data.
 
-    Parameters:
-    eeg: EEG
-    segment_length: int - Length of segments for calculation.
-    metrics_list: list - List specifying which metrics to calculate, can contain metric names or dictionaries.
-    sampling_frequency: int, optional - The sampling frequency of the signal.
-    seizure_duration: int, optional - The duration of the seizure.
-    frequency_bands: dict, optional - Frequency bands for calculations.
+    This function computes specified seizure metrics for given EEG signals, allowing customization 
+    of segment length, metrics to calculate, and frequency bands. It validates inputs and 
+    organizes the computation of metrics based on the specified list.
 
-    Returns:
-    results: dict - Dictionary of calculated metrics.
+    Parameters
+    ----------
+    eeg : dict
+        A dictionary containing EEG data with the following keys:
+        - 'signals': A numpy array of EEG signals.
+        - 'sampling_frequency': The sampling frequency of the EEG signals in Hz.
+        - 'timepoints': A dictionary containing 'seizure_startpoint' and 'seizure_endpoint'.
+    segment_length : int, optional
+        Length of segments for calculation (default is set to DEFAULTS['segment_length']).
+    metrics_list : list, optional
+        List specifying which metrics to calculate. It can contain metric names (strings) or dictionaries 
+        that specify the metric name and parameters.
+    seizure_duration : int, optional
+        Duration of the seizure (not currently used but may be relevant for future metrics).
+    frequency_bands : dict, optional
+        Frequency bands for calculations (default includes common EEG bands).
+    debug : bool, optional
+        If True, prints debug information to aid in tracing the computation (default is False).
+
+    Returns
+    -------
+    results : list
+        A list of dictionaries containing calculated metrics with the following structure:
+        - name: The name of the metric.
+        - value: The calculated value of the metric.
+        - timepoints: A dictionary containing relevant timepoints.
+        - unit: The unit of measurement.
+        - description: A brief description of the metric.
+
+    Raises
+    ------
+    ValueError
+        If any input data is invalid or if metrics cannot be calculated due to missing data.
+    
+    Examples
+    --------
+    >>> from ectmetrics.eeg import generate
+    >>> eeg = generate(signal_duration = 28, seizure_duration = 21, sampling_frequency = 200)
+    >>> result_metrics = metrics(eeg, metrics_list=['asei', 'sei'], debug=True)
+    >>> print(result_metrics)
     """
     
     if debug:
