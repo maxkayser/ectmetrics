@@ -20,7 +20,7 @@ def calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpo
     debug: bool - If True, print debug information.
     
     Returns:
-    float - The calculated ASEI value in microvolts squared.
+    dict: A dictionary containing the calculated ASEI metric.
     """
     
     if debug:
@@ -75,7 +75,7 @@ def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     debug: bool - If True, print debug information.
     
     Returns:
-    float - The calculated SEI value in microvolts squared * seconds.
+    dict: A dictionary containing the calculated SEI metric.
     """
     
     if debug:
@@ -148,7 +148,7 @@ def calculate_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     debug: bool - If True, print debug information.
 
     Returns:
-    float - The calculated PSI value in percentage.
+    dict: A dictionary containing the calculated PSI metric.
     """
     
     if debug:
@@ -213,7 +213,7 @@ def calculate_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
     debug: bool - If True, print debug information.
 
     Returns:
-    float - The calculated EIA value.
+    dict: A dictionary containing the calculated EIA metric.
     """
 
     if debug:
@@ -266,7 +266,7 @@ def calculate_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
     debug: bool - If True, print debug information.
 
     Returns:
-    float - The calculated MIA value.
+    dict: A dictionary containing the calculated MIA metric.
     """
     
     if debug:
@@ -332,7 +332,7 @@ def calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     debug: bool - If True, print debug information.
 
     Returns:
-    float - The calculated MSP value.
+    dict: A dictionary containing the calculated MSP metric.
     """
 
     if debug:
@@ -412,7 +412,7 @@ def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length,
     debug: bool - If True, print debug information.
 
     Returns:
-    float - The calculated TTPP value.
+    dict: A dictionary containing the calculated TTPP metric.
     """
 
     if debug:
@@ -470,7 +470,7 @@ def calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     debug: bool - If True, print debug information.
 
     Returns:
-    dict - COH
+    dict: A dictionary containing the calculated COH metric.
     """
     
     if debug:
@@ -556,7 +556,7 @@ def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length,
     debug: bool - If True, print debug information (default is False).
 
     Returns:
-    dict - TTPC
+    dict: A dictionary containing the calculated TTPC metric.
     """
     try:
     
