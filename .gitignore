@@ -64,6 +64,8 @@ dmypy.json
 # Sphinx
 sphinx/
 .buildinfo
+Makefile
+make.bat
 
 # Temporary files
 tmp/
