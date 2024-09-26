@@ -52,9 +52,9 @@ from ectmetrics.metrics import calculate_metrics
 
 # Generate a synthetic EEG signal
 eeg = generate(
-    signal_duration=28,
-    seizure_duration=21,
-    sampling_frequency=200,
+    signal_duration=28,      # in seconds
+    seizure_duration=21,     # in seconds
+    sampling_frequency=200,  # in Hz
     eeg_name='My EEG'
 )
 
