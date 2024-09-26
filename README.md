@@ -34,6 +34,15 @@ pip install .
 
 ## Usage
 
+### Usage examples
+
+- <a href="examples/example_simple.ipynb" target="_blank" alt="Simple usage example">Simple usage example</a>
+- <a href="examples/example_eeg_signal_generation.ipynb" target="_blank" alt="EEG signal generatio">EEG signal generation</a>
+- <a href="examples/example_eeg_signal_import.ipynb" target="_blank" alt="EEG signal import">EEG signal import</a>
+- <a href="examples/example_ect_metrics_calculation.ipynb" target="_blank" alt="ECT seizure quality metrics calculation">ECT seizure quality metrics calculation</a>
+
+### Simple example
+
 First, import the `ectmetrics` library.
 
 ```python
@@ -91,7 +100,7 @@ df_metrics
 
 <img src="assets/ectmetrics-ect_seizure_quality_metrics.png" alt="ECT seizure quality metrics" width="auto" height="250">
 
-## Complete workflow example
+### Complete workflow example
 Here’s a complete example of generating an EEG signal and calculating the seizure metrics.
 
 ```python
