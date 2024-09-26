@@ -1,0 +1,4 @@
+Citations
+==========
+
+.. include:: ../../CITATIONS.md
