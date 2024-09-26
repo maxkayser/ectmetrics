@@ -7,7 +7,7 @@ DEFAULTS = {
     'segment_length': 256
 }
 
-def calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint, seizure_endpoint, debug=False):
+def metric_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint, seizure_endpoint, debug=False):
 
     """
     Calculate the Average Seizure Energy Index (ASEI) for a given EEG signal.
@@ -49,11 +49,11 @@ def calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpo
     Examples:
     --------------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
-    >>> result = calculate_asei(eeg_data, eeg_channel=0, sampling_frequency=256,
+    >>> result = metric_asei(eeg_data, eeg_channel=0, sampling_frequency=256,
     ...                          seizure_startpoint=1.0, seizure_endpoint=2.0, debug=True)
     >>> print(result)
     """
-    
+
     if debug:
         print("> Calculating ASEI")
 
@@ -90,7 +90,7 @@ def calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpo
         print(f"An error occurred during calculation of ASEI: {e}")
         return None
 
-def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, asei=None, debug=False):
+def metric_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, asei=None, debug=False):
 
     """
     Calculate the Seizure Energy Index (SEI) based on the Average Seizure Energy Index (ASEI).
@@ -136,7 +136,7 @@ def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     Examples
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
-    >>> sei_result = calculate_sei(eeg_data, eeg_channel=0, sampling_frequency=256,
+    >>> sei_result = metric_sei(eeg_data, eeg_channel=0, sampling_frequency=256,
     ...                            segment_length=2.0, seizure_startpoint=1.0,
     ...                            seizure_endpoint=3.0, asei=10.0, debug=True)
     >>> print(sei_result)
@@ -165,7 +165,7 @@ def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     
         # Calculate ASEI if not provided
         if asei is None:
-            asei_result = calculate_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint, seizure_endpoint, debug)
+            asei_result = metric_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint, seizure_endpoint, debug)
             asei = asei_result['value']
             
         # Calculate seizure duration in seconds
@@ -199,7 +199,7 @@ def calculate_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
         return None
 
 
-def calculate_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_endpoint, debug=False):
+def metric_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_endpoint, debug=False):
     """
     Calculate the Postictal Suppression Index (PSI) for a given EEG signal.
 
@@ -239,7 +239,7 @@ def calculate_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     Examples
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
-    >>> psi_result = calculate_psi(eeg_data, eeg_channel=0, sampling_frequency=256,
+    >>> psi_result = metric_psi(eeg_data, eeg_channel=0, sampling_frequency=256,
     ...                           segment_length=64, seizure_endpoint=3.0, debug=True)
     >>> print(psi_result)
     """
@@ -292,7 +292,7 @@ def calculate_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
         return np.nan
 
 
-def calculate_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, seizure_endpoint, debug=False):
+def metric_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, seizure_endpoint, debug=False):
 
     """
     Calculate the Early Ictal Amplitude (EIA) for a given EEG signal segment.
@@ -332,7 +332,7 @@ def calculate_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
     Examples
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
-    >>> eia_result = calculate_eia(eeg_data, eeg_channel=0, segment_length=64,
+    >>> eia_result = metric_eia(eeg_data, eeg_channel=0, segment_length=64,
     ...                            seizure_startpoint=50, seizure_endpoint=3.0, debug=True)
     >>> print(eia_result)
     """
@@ -374,7 +374,7 @@ def calculate_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
         return np.nan
 
 
-def calculate_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, seizure_endpoint, debug=False):
+def metric_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, seizure_endpoint, debug=False):
 
     """
     Calculate the Midictal Amplitude (MIA) for a given EEG signal segment.
@@ -415,7 +415,7 @@ def calculate_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
     Examples
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
-    >>> mia_result = calculate_mia(eeg_data, eeg_channel=0, segment_length=64,
+    >>> mia_result = metric_mia(eeg_data, eeg_channel=0, segment_length=64,
     ...                            seizure_startpoint=50, seizure_endpoint=3.0, debug=True)
     >>> print(mia_result)
     """
@@ -468,7 +468,7 @@ def calculate_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, 
         return np.nan, np.nan, np.nan
 
 
-def calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, debug=False):
+def metric_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, debug=False):
 
     """
     Calculate the Maximum Sustained Power (MSP) of EEG signals within a specified seizure segment.
@@ -515,7 +515,7 @@ def calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
     >>> frequency_bands = {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}
-    >>> msp_result = calculate_msp(eeg_data, eeg_channel=0, sampling_frequency=256,
+    >>> msp_result = metric_msp(eeg_data, eeg_channel=0, sampling_frequency=256,
     ...                             segment_length=64, seizure_startpoint=50, seizure_endpoint=3.0,
     ...                             frequency_bands=frequency_bands, debug=True)
     >>> print(msp_result)
@@ -581,7 +581,7 @@ def calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
         return np.nan, np.nan, np.nan
 
 
-def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, msp_startpoint=None,  msp_endpoint=None,debug=False):
+def metric_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, msp_startpoint=None,  msp_endpoint=None,debug=False):
     
     """
     Calculate the Time to Peak Power (TTPP) for EEG signals during a seizure.
@@ -632,7 +632,7 @@ def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length,
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data
     >>> frequency_bands = {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}
-    >>> ttpp_result = calculate_ttpp(eeg_data, eeg_channel=0, sampling_frequency=256,
+    >>> ttpp_result = metric_ttpp(eeg_data, eeg_channel=0, sampling_frequency=256,
     ...                               segment_length=64, seizure_startpoint=50, seizure_endpoint=3.0,
     ...                               frequency_bands=frequency_bands, debug=True)
     >>> print(ttpp_result)
@@ -646,7 +646,7 @@ def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length,
     
         # Validate msp_startpoint and msp_endpoint
         if (msp_startpoint is None or msp_endpoint is None or np.isnan(msp_startpoint) or np.isnan(msp_endpoint)):
-            msp_result = calculate_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands)
+            msp_result = metric_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands)
             
             msp_startpoint = msp_result['timepoints']['startpoint']
             msp_endpoint = msp_result['timepoints']['endpoint']
@@ -679,7 +679,7 @@ def calculate_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length,
         return np.nan
 
 
-def calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug=False):
+def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug=False):
  
     """
     Calculate the Maximum Sustained Coherence (COH) between two EEG channels during a seizure.
@@ -722,7 +722,7 @@ def calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
     Examples
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data for 2 channels
-    >>> coherence_result = calculate_coh(eeg_data, eeg_channel=[0, 1], sampling_frequency=256,
+    >>> coherence_result = metric_coh(eeg_data, eeg_channel=[0, 1], sampling_frequency=256,
     ...                                    segment_length=64, seizure_startpoint=50, n_consecutive_segments=4, debug=True)
     >>> print(coherence_result)
     """
@@ -792,7 +792,7 @@ def calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, 
         raise ValueError("COH cannot be calculated.")
         
 
-def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, coh_startpoint=None, coh_endpoint=None, debug=False):
+def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, coh_startpoint=None, coh_endpoint=None, debug=False):
 
     """
     Calculate the Time to Peak Coherence (TTPC) during a seizure segment.
@@ -838,7 +838,7 @@ def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length,
     Examples
     --------
     >>> eeg_data = np.random.randn(2, 1000)  # Simulated EEG data for 2 channels
-    >>> ttp_result = calculate_ttpc(eeg_data, eeg_channel=[0, 1], sampling_frequency=256,
+    >>> ttp_result = metric_ttpc(eeg_data, eeg_channel=[0, 1], sampling_frequency=256,
     ...                              segment_length=64, seizure_startpoint=50, n_consecutive_segments=4, debug=True)
     >>> print(ttp_result)
     """
@@ -847,7 +847,7 @@ def calculate_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length,
     
         # Validate coh_startpoint and coh_endpoint
         if (coh_startpoint is None or coh_endpoint is None or np.isnan(coh_startpoint) or np.isnan(coh_endpoint)):
-            coh_result = calculate_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug)
+            coh_result = metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug)
  
             coh_startpoint = coh_result['timepoints']['startpoint']
             coh_endpoint = coh_result['timepoints']['endpoint']
@@ -1049,7 +1049,7 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
         
 
         if metric_name == 'asei':
-            results.append(calculate_asei(eeg_signals, metric['channel'], segment_length, seizure_startpoint, seizure_endpoint, debug))
+            results.append(metric_asei(eeg_signals, metric['channel'], segment_length, seizure_startpoint, seizure_endpoint, debug))
 
         elif metric_name == 'sei':
             
@@ -1061,19 +1061,19 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
                 if results_metric['name'] == 'asei':
                     asei = results_metric['value']
                     
-            results.append(calculate_sei(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, asei, debug))
+            results.append(metric_sei(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, asei, debug))
 
         elif metric_name == 'psi':
-            results.append(calculate_psi(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_endpoint, debug))
+            results.append(metric_psi(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_endpoint, debug))
         
         elif metric_name == 'eia':
-            results.append(calculate_eia(eeg_signals, metric['channel'], segment_length, seizure_startpoint, seizure_endpoint, debug))
+            results.append(metric_eia(eeg_signals, metric['channel'], segment_length, seizure_startpoint, seizure_endpoint, debug))
 
         elif metric_name == 'mia':
-            results.append(calculate_mia(eeg_signals, metric['channel'], segment_length, seizure_startpoint, seizure_endpoint, debug))
+            results.append(metric_mia(eeg_signals, metric['channel'], segment_length, seizure_startpoint, seizure_endpoint, debug))
 
         elif metric_name == 'msp':
-            results.append(calculate_msp(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, debug))
+            results.append(metric_msp(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, debug))
 
         elif metric_name == 'ttpp':
         
@@ -1092,7 +1092,7 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
                         msp_startpoint = None
                         msp_endpoint = None
                         
-            results.append(calculate_ttpp(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, msp_startpoint,  msp_endpoint, debug))
+            results.append(metric_ttpp(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, frequency_bands, msp_startpoint,  msp_endpoint, debug))
 
         elif metric_name == 'coh':
             #!
@@ -1100,7 +1100,7 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
             metric['n_consecutive_segments'] = 8
             metric['channel'] = [0, 1]
             
-            results.append(calculate_coh(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
+            results.append(metric_coh(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
  
  
         elif metric_name == 'ttpc':
@@ -1124,6 +1124,6 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
             #
             metric['n_consecutive_segments'] = 8
             metric['channel'] = [0, 1]
-            results.append(calculate_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
+            results.append(metric_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
 
     return results
