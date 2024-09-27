@@ -68,7 +68,7 @@ metrics_results
 
 ## Contact Information
 
-For more details, please refer to the [Contact Information](CONTACT.md) file.
+For more details, please refer to the [contact information](CONTACT.md) file.
 
 
 ## Citing ECTMetrics
