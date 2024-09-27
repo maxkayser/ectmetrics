@@ -77,8 +77,6 @@ For citation information, please refer to the [citations](CITATIONS.md) file.
 
 ## Acknowledgements
 
-## Acknowledgements
-
 The authors sincerely acknowledge the access granted to the [Bonna computing cluster](https://www.hpc.uni-bonn.de/en) hosted by the [University of Bonn](https://www.uni-bonn.de/en) and the support provided by its High-Performance Computing & Analytics Lab. We extend special thanks to Ralf Berninger for his invaluable technical insights and assistance regarding the Thymatron® System IV stimulation device. We also express our deep gratitude to Jesse Pavel for the development and ongoing enhancement of the ECT data collection tool, [GPD](https://github.com/elektrika-inc/GPD-wiki).
 
 All acknowledgments are associated with research that was partially funded by the [BONFOR](https://www.medfak.uni-bonn.de/de/forschung/forschungsfoerderung/bonfor/bonfor-forschungsfoerderprogramm) and the FKS study support program [2021-FKS-12] of the [University Hospital Bonn](https://www.ukbonn.de/). This research did not receive any additional grants from funding agencies in the public, commercial, or not-for-profit sectors.
