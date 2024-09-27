@@ -48,7 +48,7 @@ Here’s a short example of generating an EEG signal and calculating the ECT sei
 # Import the ectmetrics library and it's modules
 import ectmetrics
 from ectmetrics.eeg import generate, plot
-from ectmetrics.metrics import calculate_metrics
+from ectmetrics.metrics import metric
 
 # Generate a synthetic EEG signal
 eeg_data = generate(
@@ -59,7 +59,7 @@ eeg_data = generate(
 )
 
 # Calculate the ECT seizure quality metrics
-metrics_results = calculate_metrics(eeg_data)
+metrics_results = metric(eeg_data)
 
 metrics_results
 ```
