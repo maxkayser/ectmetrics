@@ -1062,7 +1062,6 @@ def metric(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, se
         {
             'name': 'ttpc',
             'calculate': True,
-            'n_consecutive_segments': 8,
             'channels': [0, 1],
             'options': {
                 'n_consecutive_segments': 8,
@@ -1105,8 +1104,6 @@ def metric(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, se
                             indices.append(updated_metric)
 
         metrics_list = indices
-
-    #metrics_list = None
     
     results = []
 
@@ -1187,11 +1184,6 @@ def metric(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, se
                         coh_startpoint = None
                         coh_endpoint = None
                         
-            #!
-            #
-            #
-            #metric['n_consecutive_segments'] = 8
-            #metric['channel'] = [0, 1]
             results.append(metric_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['options']['n_consecutive_segments'], debug))
 
     return results
