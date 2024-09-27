@@ -7,6 +7,18 @@ DEFAULTS = {
     'segment_length': 256
 }
 
+# Define templates
+templates = {
+    'metric_result': {
+        'name': None,
+        'description': None,
+        'options': None,
+        'value': None,
+        'unit': None,
+        'timepoints': None,
+    }
+}
+
 def metric_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint, seizure_endpoint, debug=False):
 
     """
@@ -70,16 +82,20 @@ def metric_asei(eeg_signals, eeg_channel, sampling_frequency, seizure_startpoint
         asei = average_energy 
         
         if asei is not None:
-            asei_result = {
-                'name': 'asei', 
-                'value': asei, 
-                'timepoints': {
-                    'startpoint': asei_startpoint,
-                    'endpoint': asei_endpoint,
-                },
-                'unit': 'μV²',
-                'description': 'Average Seizure Energy Index'
+
+            # Load metric result template
+            asei_result = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            asei_result['name'] = 'asei'
+            asei_result['description'] = 'Average Seizure Energy Index'
+            asei_result['value'] = asei
+            asei_result['unit'] = 'μV²'
+            asei_result['timepoints'] = {
+                'startpoint': asei_startpoint,
+                'endpoint': asei_endpoint
             }
+            asei_result['options'] = None
             
         if debug:
             print(f"Calculated ASEI: {asei_result}")
@@ -178,16 +194,20 @@ def metric_sei(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
         sei = asei * seizure_duration if asei is not None else None
         
         if sei is not None:
-            sei_result = {
-                'name': 'sei', 
-                'value': sei, 
-                'timepoints': {
-                    'startpoint': sei_startpoint,
-                    'endpoint': sei_endpoint,
-                },
-                'unit': 'μV²·s',
-                'description': 'Seizure Energy Index'
+
+            # Load metric result template
+            sei_result = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            sei_result['name'] = 'sei'
+            sei_result['description'] = 'Seizure Energy Index'
+            sei_result['value'] = sei
+            sei_result['unit'] = 'μV²·s'
+            sei_result['timepoints'] = {
+                'startpoint': sei_startpoint,
+                'endpoint': sei_endpoint
             }
+            sei_result['options'] = None
             
         if debug:
             print(f">> Calculated SEI: {sei_result}")
@@ -271,16 +291,20 @@ def metric_psi(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
         psi = (1 - (psi_nonictal_abs_mean / psi_ictal_abs_mean)) * 100 if psi_ictal_abs_mean > 0 else np.nan
         
         if psi is not None:
-            psi_result = {
-                'name': 'psi', 
-                'value': psi, 
-                'timepoints': {
-                    'startpoint': psi_ictal_start_sample,
-                    'endpoint': psi_nonictal_end_sample,
-                },
-                'unit': '%',
-                'description': 'Postictal Suppression Index'
+
+            # Load metric result template
+            psi_result = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            psi_result['name'] = 'psi'
+            psi_result['description'] = 'Postictal Suppression Index'
+            psi_result['value'] = psi
+            psi_result['unit'] = '%'
+            psi_result['timepoints'] = {
+                'startpoint': psi_ictal_start_sample,
+                'endpoint': psi_nonictal_end_sample
             }
+            psi_result['options'] = None
             
         if debug:
             print(f"Calculated PSI: {psi_result}")
@@ -353,16 +377,20 @@ def metric_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, sei
         eia = abs(eeg_signals[eeg_channel][eia_startpoint:eia_endpoint]).mean()
         
         if eia is not None:
-            eia_result = {
-                'name': 'eia', 
-                'value': eia, 
-                'timepoints': {
-                    'startpoint': eia_startpoint,
-                    'endpoint': eia_endpoint,
-                },
-                'unit': 'μV',
-                'description': 'Early Ictal Amplitude'
+
+            # Load metric result template
+            eia_result = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            eia_result['name'] = 'eia'
+            eia_result['description'] = 'Early Ictal Amplitude'
+            eia_result['value'] = eia
+            eia_result['unit'] = 'μV'
+            eia_result['timepoints'] = {
+                'startpoint': eia_startpoint,
+                'endpoint': eia_endpoint
             }
+            eia_result['options'] = None
         
         if debug:
             print(f"Calculated EIA: {eia_result}")
@@ -445,16 +473,20 @@ def metric_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, sei
             mia_endpoint = seizure_startpoint + (mia_index + 8) * segment_length 
             
             if mia is not None:
-                mia_result = {
-                    'name': 'mia', 
-                    'value': mia, 
-                    'timepoints': {
-                        'startpoint': mia_startpoint,
-                        'endpoint': mia_endpoint,
-                    },
-                'unit': 'μV',
-                'description': 'Midictal Amplitude'
+    
+                # Load metric result template
+                mia_result = templates['metric_result'].copy()
+                
+                # Set metric result variables
+                mia_result['name'] = 'mia'
+                mia_result['description'] = 'Midictal Amplitude'
+                mia_result['value'] = mia
+                mia_result['unit'] = 'μV'
+                mia_result['timepoints'] = {
+                    'startpoint': mia_startpoint,
+                    'endpoint': mia_endpoint
                 }
+                mia_result['options'] = None
             
             if debug:
                 print(f"Calculated MIA: {mia}, Startpoint: {mia_startpoint}, Endpoint: {mia_endpoint}")
@@ -558,16 +590,20 @@ def metric_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
             msp_endpoint = seizure_startpoint + (msp_index + 8) * segment_length
             
             if msp is not None:
-                msp_result = {
-                    'name': 'msp', 
-                    'value': msp, 
-                    'timepoints': {
-                        'startpoint': msp_startpoint,
-                        'endpoint': msp_endpoint,
-                    },
-                'unit': 'μV²/Hz',
-                'description': 'Maximum Sustained Power'
+
+                # Load metric result template
+                msp_result = templates['metric_result'].copy()
+                
+                # Set metric result variables
+                msp_result['name'] = 'msp'
+                msp_result['description'] = 'Maximum Sustained Power'
+                msp_result['value'] = msp
+                msp_result['unit'] = 'μV²/Hz'
+                msp_result['timepoints'] = {
+                    'startpoint': msp_startpoint,
+                    'endpoint': msp_endpoint
                 }
+                msp_result['options'] = None
                 
             if debug:
                 print(f"Calculated MSP: {msp}, Startpoint: {msp_startpoint}, Endpoint: {msp_endpoint}")
@@ -659,15 +695,19 @@ def metric_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
         ttpp = ((msp_endpoint - msp_startpoint) / 2 + msp_startpoint) / sampling_frequency
             
         if ttpp is not None:
-            ttpp_result = {
-                'name': 'ttpp', 
-                'value': ttpp, 
-                'timepoints': {
-                    'timepoint': int(ttpp * sampling_frequency)
-                },
-                'unit': 's',
-                'description': 'Time to Peak Power'
+
+            # Load metric result template
+            ttpp_result = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            ttpp_result['name'] = 'ttpp'
+            ttpp_result['description'] = 'Time to Peak Power'
+            ttpp_result['value'] = ttpp
+            ttpp_result['unit'] = 's'
+            ttpp_result['timepoints'] = {
+                'timepoint': int(ttpp * sampling_frequency)
             }
+            ttpp_result['options'] = None
         
         if debug:
             print(f"Calculated TPPP: {ttpp}s")
@@ -776,16 +816,20 @@ def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
         coh_endpoint = seizure_startpoint + (coh_index + 1 + 4) * segment_length
         
         if coh is not None:
-            coh_results = {
-                'name': 'coh', 
-                'value': coh, 
-                'timepoints': {
-                        'startpoint': coh_startpoint,
-                        'endpoint': coh_endpoint,
-                },
-                'unit': '%',
-                'description': 'Maximum Sustained Coherence'
+
+            # Load metric result template
+            coh_results = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            coh_results['name'] = 'coh'
+            coh_results['description'] = 'Maximum Sustained Coherence'
+            coh_results['value'] = coh
+            coh_results['unit'] = '%'
+            coh_results['timepoints'] = {
+                'startpoint': coh_startpoint,
+                'endpoint': coh_endpoint
             }
+            coh_results['options'] = None
 
         return coh_results
     else:
@@ -861,15 +905,19 @@ def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
         ttpc = ((coh_endpoint - coh_startpoint) / 2 + coh_startpoint) / sampling_frequency
             
         if ttpc is not None:
-            ttpc_result = {
-                'name': 'ttpc', 
-                'value': ttpc, 
-                'timepoints': {
-                    'timepoint': int(ttpc * sampling_frequency)
-                },
-                'unit': 's',
-                'description': 'Time to Peak Coherence'
+
+            # Load metric result template
+            ttpc_result = templates['metric_result'].copy()
+            
+            # Set metric result variables
+            ttpc_result['name'] = 'ttpc'
+            ttpc_result['description'] = 'Time to Peak Coherence'
+            ttpc_result['value'] = ttpc
+            ttpc_result['unit'] = 's'
+            ttpc_result['timepoints'] = {
+                'timepoint': int(ttpc * sampling_frequency)
             }
+            ttpc_result['options'] = None
         
         if debug:
             print(f"Calculated TPPP: {ttpc}s")
@@ -880,7 +928,7 @@ def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
         print(f"An error occurred during calculation of TTPC: {e}")
         return np.nan
         
-def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, seizure_duration=None, frequency_bands=None, debug=False):
+def metric(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, seizure_duration=None, frequency_bands=None, debug=False):
     """
     Main function to calculate various seizure metrics based on the provided EEG data.
 
@@ -925,8 +973,8 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
     Examples
     --------
     >>> from ectmetrics.eeg import generate
-    >>> eeg = generate(signal_duration = 28, seizure_duration = 21, sampling_frequency = 200)
-    >>> result_metrics = metrics(eeg, metrics_list=['asei', 'sei'], debug=True)
+    >>> eeg_data = generate(signal_duration = 28, seizure_duration = 21, sampling_frequency = 200)
+    >>> result_metrics = metric(eeg_data, metrics_list=['asei', 'sei'], debug=True)
     >>> print(result_metrics)
     """
     
@@ -1006,42 +1054,60 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
         {
             'name': 'coh',
             'calculate': True,
-            'n_consecutive_segments': 8,
-            'channels': [0, 1]
+            'channels': [0, 1],
+            'options': {
+                'n_consecutive_segments': 8,
+            }
         },
         {
             'name': 'ttpc',
             'calculate': True,
             'n_consecutive_segments': 8,
-            'channels': [0, 1]
+            'channels': [0, 1],
+            'options': {
+                'n_consecutive_segments': 8,
+            }
         }
     ]
         
     # If metrics_list is None, use the default metrics list to calculate all
     if metrics_list is None:
         metrics_list = [metric for metric in default_metrics_list if metric['calculate']]
+        
     else:
+        
         # Create a list for the specified metrics, initializing with default params
         indices = []
         if isinstance(metrics_list, list):
+            
             # Check if it's a mix of names and dicts
             for item in metrics_list:
                 if isinstance(item, str):
+                    
                     # If it's a name, get the default params
                     default_metric = next((metric for metric in default_metrics_list if metric['name'] == item), None)
+                    
                     if default_metric is not None:
                         indices.append(default_metric)
+                        
                 elif isinstance(item, dict):
+                    
                     # If it's a dict, add it with the specified name
                     metric_name = item.get('name')
                     default_metric = next((metric for metric in default_metrics_list if metric['name'] == metric_name), None)
+                    
                     if default_metric is not None:
+                        
                         # Update the default parameters with the provided ones
                         updated_metric = {**default_metric, **item}
-                        indices.append(updated_metric)
+                        
+                        if updated_metric['calculate']:
+                            #indices.append(updated_metric)
 
         metrics_list = indices
 
+    metrics_list = None
+    
     results = []
 
     for metric in metrics_list:
@@ -1099,12 +1165,11 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
         elif metric_name == 'coh':
             #!
             #
-            metric['n_consecutive_segments'] = 8
-            metric['channel'] = [0, 1]
+            #metric['n_consecutive_segments'] = 8
+            #metric['channel'] = [0, 1]
             
-            results.append(metric_coh(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
- 
- 
+            results.append(metric_coh(eeg_signals, metric['channel'], sampling_frequency, segment_length, seizure_startpoint, metric['options']['n_consecutive_segments'], debug))
+
         elif metric_name == 'ttpc':
         
             # Initialize variables to hold start and endpoint for COH
@@ -1125,8 +1190,8 @@ def metrics(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, s
             #!
             #
             #
-            metric['n_consecutive_segments'] = 8
-            metric['channel'] = [0, 1]
-            results.append(metric_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['n_consecutive_segments'], debug))
+            #metric['n_consecutive_segments'] = 8
+            #metric['channel'] = [0, 1]
+            results.append(metric_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['options']['n_consecutive_segments'], debug))
 
     return results
