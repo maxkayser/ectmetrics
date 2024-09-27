@@ -6,8 +6,8 @@ EctMetrics
 │
 ├── ectmetrics/                   		          # Main package directory
 │   ├── __init__.py            	 	              # Package initialization file
-│   ├── eeg.py             				          # EEG signal processing
-│   └── metrics.py            			          # Functions for metric calculations
+│   ├── eeg.py             				          # EEG signal generation and processing
+│   └── metrics.py            			          # Functions for ECT metric calculations
 │
 ├── tests/                    				      # Directory for tests
 │   ├── __init__.py           			          # Test package initialization file
