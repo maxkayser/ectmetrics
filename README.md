@@ -51,7 +51,7 @@ from ectmetrics.eeg import generate, plot
 from ectmetrics.metrics import calculate_metrics
 
 # Generate a synthetic EEG signal
-eeg = generate(
+eeg_data = generate(
     signal_duration=28,      # in seconds
     seizure_duration=21,     # in seconds
     sampling_frequency=200,  # in Hz
@@ -59,7 +59,7 @@ eeg = generate(
 )
 
 # Calculate the ECT seizure quality metrics
-metrics_results = calculate_metrics(eeg)
+metrics_results = calculate_metrics(eeg_data)
 
 metrics_results
 ```
