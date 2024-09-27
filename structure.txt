@@ -1,5 +1,9 @@
 EctMetrics
 │
+├── assets/                   		          # Assets directory
+│   ├── ectmetrics-ect_seizure_quality_metrics.png
+│   └── ectmetrics-plotted_eeg_signal.png
+│
 ├── ectmetrics/                   		          # Main package directory
 │   ├── __init__.py            	 	              # Package initialization file
 │   ├── eeg.py             				          # EEG signal processing
@@ -17,11 +21,15 @@ EctMetrics
 │   └── example_ect_metrics_calculation.ipynb     # Example how to calculate ECT seizure quality metrics
 │
 ├── docs/                     				      # Documentation
-│   ├── index.md              			          # Main documentation file
-│   └── usage.md              		              # Usage examples and instructions
+│   ├── build/
+│   └── source/
 │
-├── structure.txt                 		          # Project structure
+├── CITATIONS.md                 		          # Informations on how to cite this repository
+├── CONTACT.md                 		              # Contact information
+├── LICENSE                 		                  # License details
+├── pyproject.toml                            # Configuration for build system and project metadata
 ├── README.md                 		              # Project description and instructions
 ├── requirements.txt          		              # Dependencies for the project
 ├── setup.py                  		        	  # Setup script for installation
+├── structure.txt                 		          # Project structure
 └── .gitignore                		        	  # Files and directories to be ignored by Git
