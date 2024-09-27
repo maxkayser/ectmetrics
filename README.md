@@ -75,6 +75,8 @@ For more details, please refer to the [contact information](CONTACT.md) file.
 
 For citation information, please refer to the [citations](CITATIONS.md) file.
 
+## Acknowledgements
+This research project was partly funded by the BONFOR and the FKS study support program [2021-408 FKS-12] of the University Hospital Bonn. This research did not receive any other grants from funding agencies in the public, commercial, or not-for-profit sectors.
 
 ## Running Tests
 
