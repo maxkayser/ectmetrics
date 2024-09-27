@@ -81,7 +81,7 @@ def generate(signal_duration=DEFAULTS['signal_duration'], sampling_frequency=DEF
  
     """
     Generate a simulated EEG signal with optional stimulation, seizure, and postictal phases for two channels.
-
+    
     Parameters
     ----------
     signal_duration : float, optional
@@ -106,24 +106,26 @@ def generate(signal_duration=DEFAULTS['signal_duration'], sampling_frequency=DEF
         Default is ``DEFAULTS['filters']``.
     eeg_name : str, optional
         Name of the EEG file to save, if provided. Default is None.
-
+    
     Returns
     -------
-    t : numpy.ndarray
-        Time array corresponding to the EEG signal.
-    eeg_signals : numpy.ndarray
-        2D numpy array containing the simulated EEG signals for both channels.
-    stim_startpoint : int
-        The index where stimulation starts.
-    seizure_startpoint : int
-        The index where the seizure starts.
-    seizure_endpoint : int
-        The index where the seizure ends.
-
+    dict
+        A dictionary containing the following keys:
+        - 'name': str, Name of the EEG file.
+        - 'signals': numpy.ndarray, 2D numpy array containing the simulated EEG signals for both channels.
+        - 'channels': list of int, List of EEG channel indices.
+        - 'x-axis': numpy.ndarray, Time array corresponding to the EEG signal.
+        - 'sampling_frequency': int, The sampling frequency of the EEG signal.
+        - 'timepoints': dict, A dictionary with the following keys:
+            - 'stim_startpoint': int, The index where stimulation starts.
+            - 'seizure_startpoint': int, The index where the seizure starts.
+            - 'seizure_endpoint': int, The index where the seizure ends.
+        - 'filters': dict, The applied filter configuration.
+    
     Notes
     -----
-    The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal). 
-    Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the 
+    The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal).
+    Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the
     `filters` dictionary.
 
     Example
