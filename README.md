@@ -58,7 +58,7 @@ eeg_data = generate(
     eeg_name='My EEG'
 )
 
-# Calculate the ECT seizure quality metrics
+# Calculate all default ECT seizure quality metrics
 metrics_results = metric(eeg_data)
 
 metrics_results
