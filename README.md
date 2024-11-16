@@ -55,7 +55,7 @@ eeg_data = generate(
     signal_duration=28,      # in seconds
     seizure_duration=21,     # in seconds
     sampling_frequency=200,  # in Hz
-    eeg_name='My EEG'
+    eeg_name='ECT EEG'
 )
 
 # Calculate all default ECT seizure quality metrics
