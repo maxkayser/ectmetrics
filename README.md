@@ -20,7 +20,10 @@ ECTMetrics is a Python library for analyzing EEG signals, particularly focusing 
   - **Time to Peak Power (TTPP)**
   - **Maximum Sustained Coherence (COH)**
   - **Time to Peak Coherence (TTPC)**
-  
+## Documentation
+
+The code documentation is available at:
+[https://maxkayser.github.io/ectmetrics](https://maxkayser.github.io/ectmetrics)
   
 ## Installation
 
