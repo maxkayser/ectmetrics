@@ -11,8 +11,8 @@ ECTMetrics is a Python library for analyzing EEG signals, particularly focusing 
 
 
 - Calculate various ECT seizure metrics, including:
-  - **Average Seizure Energy Index (ASEI)**
   - **Seizure Energy Index (SEI)**
+  - **Average Seizure Energy Index (ASEI)**
   - **Postictal Suppression Index (PSI)**
   - **Earlyictal Amplitude (EIA)**
   - **Midictal Amplitude (MIA)**
@@ -55,7 +55,7 @@ eeg_data = generate(
     signal_duration=28,      # in seconds
     seizure_duration=21,     # in seconds
     sampling_frequency=200,  # in Hz
-    eeg_name='My EEG'
+    eeg_name='ECT EEG'
 )
 
 # Calculate all default ECT seizure quality metrics
