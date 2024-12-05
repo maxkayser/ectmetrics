@@ -14,7 +14,7 @@ Alternatively, you can use the following BibTeX entry if you're using a referenc
 ```bibtex
 @misc{kayser2024ectmetrics,
   author       = {Max Kayser},
-  title        = {ECTMetrics: A python library for calculating ECT seizure quality indices},
+  title        = {ECTMetrics: A python library for calculating electroconvulsive therapy seizure quality indices},
   year         = {2024},
   publisher    = {GitHub},
   institution  = {Department of Psychiatry and Psychotherapy, University Hospital Bonn, Bonn, Germany},
