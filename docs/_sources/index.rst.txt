@@ -28,6 +28,12 @@ Features
   - `Time to Peak Power (TTPP) <modules.html#ectmetrics.metric.metric_ttpp>`_
   - `Maximum Sustained Coherence (COH) <modules.html#ectmetrics.metric.metric_coh>`_
   - `Time to Peak Coherence (TTPC) <modules.html#ectmetrics.metric.metric_ttpc>`_
+  
+  
+Code availability
+-------------
+ You can find the source code for this project on GitHub at: \
+ `https://github.com/maxkayser/ectmetrics <https://github.com/maxkayser/ectmetrics>`_
 
 .. note::
    ECTMetrics is under active development, and contributions are welcome. 
