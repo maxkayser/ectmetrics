@@ -23,8 +23,7 @@ ECTMetrics is a Python library for analyzing EEG signals, particularly focusing 
     
 ## Documentation
 
-The code documentation is available at:<br>
-<a href="https://maxkayser.github.io/ectmetrics/" target="_blank">https://maxkayser.github.io/ectmetrics/</a>
+The code documentation is available at: <a href="https://maxkayser.github.io/ectmetrics/" target="_blank">https://maxkayser.github.io/ectmetrics/</a>
   
 ## Installation
 
