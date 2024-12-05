@@ -4,6 +4,6 @@ authors:
 - family-names: Kayser
   given-names: Max
 orcid: https://orcid.org/0000-0002-8589-4415
-title: "ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy"
+title: ECTMetrics
 version: 1.0.0
 date-released: 2024-12-05
