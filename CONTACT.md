@@ -12,7 +12,7 @@ Medical Psychology - Brainstimulation Group<br>
 [Charité – University Medicine Berlin](https://www.charite.de/en/)  <br>
 *Charitéplatz 1, 10117 Berlin, Germany*
 
-E-mail: [max.kayser[-a-]uni-bonn.de]
+E-mail: [max.kayser[-a-]uni-bonn.de] <br>
 E-mail: [max.kayser[-a-]charite.de]  
 
 ---
