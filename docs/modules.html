@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Usage &#8212; ECTMetrics  documentation</title>
+    <title>Modules &#8212; ECTMetrics  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=89b800e6" />
     
@@ -15,7 +15,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="ECTMetrics’s Documentation" href="index.html" /> 
+    <link rel="next" title="Contact" href="contact.html" />
+    <link rel="prev" title="ECTMetrics" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,10 +28,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="ECTMetrics’s Documentation"
+          <a href="contact.html" title="Contact"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="ECTMetrics"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">ECTMetrics  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Usage</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Modules</a></li> 
       </ul>
     </div>  
 
@@ -39,8 +43,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
+  <section id="modules">
+<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this heading">¶</a></h1>
 <section id="module-ectmetrics.eeg">
 <span id="eeg"></span><h2>eeg<a class="headerlink" href="#module-ectmetrics.eeg" title="Permalink to this heading">¶</a></h2>
 <dl class="py data">
@@ -127,23 +131,31 @@ Default is <code class="docutils literal notranslate"><span class="pre">DEFAULTS
 </section>
 <section id="returns">
 <h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>t<span class="classifier">numpy.ndarray</span></dt><dd><p>Time array corresponding to the EEG signal.</p>
-</dd>
-<dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>2D numpy array containing the simulated EEG signals for both channels.</p>
-</dd>
-<dt>stim_startpoint<span class="classifier">int</span></dt><dd><p>The index where stimulation starts.</p>
-</dd>
-<dt>seizure_startpoint<span class="classifier">int</span></dt><dd><p>The index where the seizure starts.</p>
-</dd>
-<dt>seizure_endpoint<span class="classifier">int</span></dt><dd><p>The index where the seizure ends.</p>
+<dl>
+<dt>dict</dt><dd><p>A dictionary containing the following keys:
+- ‘name’: str, Name of the EEG file.
+- ‘signals’: numpy.ndarray, 2D numpy array containing the simulated EEG signals for both channels.
+- ‘channels’: list of int, List of EEG channel indices.
+- ‘x-axis’: numpy.ndarray, Time array corresponding to the EEG signal.
+- ‘sampling_frequency’: int, The sampling frequency of the EEG signal.
+- ‘timepoints’: dict, A dictionary with the following keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘stim_startpoint’: int, The index where stimulation starts.</p></li>
+<li><p>‘seizure_startpoint’: int, The index where the seizure starts.</p></li>
+<li><p>‘seizure_endpoint’: int, The index where the seizure ends.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>‘filters’: dict, The applied filter configuration.</p></li>
+</ul>
 </dd>
 </dl>
 </section>
 <section id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h3>
-<p>The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal). 
-Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the 
+<p>The function generates an EEG signal with customizable noise, filters, and event phases (stimulation, seizure, postictal).
+Filtering options include bandpass, lowpass, and notch filters that can be applied based on the configuration in the
 <cite>filters</cite> dictionary.</p>
 </section>
 <section id="example">
@@ -330,13 +342,71 @@ in your environment.</p>
 <section id="module-ectmetrics.metrics">
 <span id="metrics"></span><h2>metrics<a class="headerlink" href="#module-ectmetrics.metrics" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_asei">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_asei</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_asei" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to calculate various seizure metrics based on the provided EEG data.</p>
+<p>This function computes specified seizure metrics for given EEG signals, allowing customization 
+of segment length, metrics to calculate, and frequency bands. It validates inputs and 
+organizes the computation of metrics based on the specified list.</p>
+<section id="id7">
+<h3>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>eeg<span class="classifier">dict</span></dt><dd><p>A dictionary containing EEG data with the following keys:
+- ‘signals’: A numpy array of EEG signals.
+- ‘sampling_frequency’: The sampling frequency of the EEG signals in Hz.
+- ‘timepoints’: A dictionary containing ‘seizure_startpoint’ and ‘seizure_endpoint’.</p>
+</dd>
+<dt>segment_length<span class="classifier">int, optional</span></dt><dd><p>Length of segments for calculation (default is set to DEFAULTS[‘segment_length’]).</p>
+</dd>
+<dt>metrics_list<span class="classifier">list, optional</span></dt><dd><p>List specifying which metrics to calculate. It can contain metric names (strings) or dictionaries 
+that specify the metric name and parameters.</p>
+</dd>
+<dt>seizure_duration<span class="classifier">int, optional</span></dt><dd><p>Duration of the seizure (not currently used but may be relevant for future metrics).</p>
+</dd>
+<dt>frequency_bands<span class="classifier">dict, optional</span></dt><dd><p>Frequency bands for calculations (default includes common EEG bands).</p>
+</dd>
+<dt>debug<span class="classifier">bool, optional</span></dt><dd><p>If True, prints debug information to aid in tracing the computation (default is False).</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>results<span class="classifier">list</span></dt><dd><p>A list of dictionaries containing calculated metrics with the following structure:
+- name: The name of the metric.
+- value: The calculated value of the metric.
+- timepoints: A dictionary containing relevant timepoints.
+- unit: The unit of measurement.
+- description: A brief description of the metric.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Raises<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If any input data is invalid or if metrics cannot be calculated due to missing data.</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Examples<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ectmetrics.eeg</span> <span class="kn">import</span> <span class="n">generate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">generate</span><span class="p">(</span><span class="n">signal_duration</span> <span class="o">=</span> <span class="mi">28</span><span class="p">,</span> <span class="n">seizure_duration</span> <span class="o">=</span> <span class="mi">21</span><span class="p">,</span> <span class="n">sampling_frequency</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result_metrics</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">metrics_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;asei&#39;</span><span class="p">,</span> <span class="s1">&#39;sei&#39;</span><span class="p">],</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result_metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_asei">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_asei</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_asei" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Average Seizure Energy Index (ASEI) for a given EEG signal.</p>
 <p>This function computes the Average Seizure Energy Index (ASEI) based on the provided EEG signals,
 focusing on a specified channel during a seizure event.</p>
-<section id="id7">
-<h3>Parameters:<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<section id="id11">
+<h3>Parameters:<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -352,8 +422,8 @@ focusing on a specified channel during a seizure event.</p>
 </dd>
 </dl>
 </section>
-<section id="id8">
-<h3>Returns:<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
+<section id="id12">
+<h3>Returns:<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated ASEI metric, including:
 - name: The name of the metric (‘asei’).
@@ -364,18 +434,18 @@ focusing on a specified channel during a seizure event.</p>
 </dd>
 </dl>
 </section>
-<section id="id9">
-<h3>Raises:<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>
+<section id="id13">
+<h3>Raises:<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>Exception</dt><dd><p>If an error occurs during the calculation, an error message is printed,
 and None is returned.</p>
 </dd>
 </dl>
 </section>
-<section id="id10">
-<h3>Examples:<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h3>
+<section id="id14">
+<h3>Examples:<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">calculate_asei</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">metric_asei</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
@@ -384,13 +454,13 @@ and None is returned.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_coh">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_coh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_consecutive_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_coh" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_coh">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_coh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_consecutive_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_coh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Maximum Sustained Coherence (COH) between two EEG channels during a seizure.</p>
 <p>COH measures the degree of synchronization between the EEG signals of two channels over specified segments,
 focusing on the delta frequency band (0.78 - 3.5 Hz).</p>
-<section id="id11">
-<h3>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h3>
+<section id="id15">
+<h3>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -408,8 +478,8 @@ focusing on the delta frequency band (0.78 - 3.5 Hz).</p>
 </dd>
 </dl>
 </section>
-<section id="id12">
-<h3>Returns<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h3>
+<section id="id16">
+<h3>Returns<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated COH metric, including:
 - name: The name of the metric (‘coh’).
@@ -420,17 +490,17 @@ focusing on the delta frequency band (0.78 - 3.5 Hz).</p>
 </dd>
 </dl>
 </section>
-<section id="id13">
-<h3>Raises<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h3>
+<section id="id17">
+<h3>Raises<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>ValueError</dt><dd><p>If the signal is shorter than the required number of segments or if COH cannot be calculated.</p>
 </dd>
 </dl>
 </section>
-<section id="id14">
-<h3>Examples<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h3>
+<section id="id18">
+<h3>Examples<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data for 2 channels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coherence_result</span> <span class="o">=</span> <span class="n">calculate_coh</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coherence_result</span> <span class="o">=</span> <span class="n">metric_coh</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                                   <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_consecutive_segments</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">coherence_result</span><span class="p">)</span>
 </pre></div>
@@ -439,63 +509,10 @@ focusing on the delta frequency band (0.78 - 3.5 Hz).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_eia">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_eia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_eia" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_eia">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_eia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_eia" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Early Ictal Amplitude (EIA) for a given EEG signal segment.</p>
 <p>The EIA represents the average absolute amplitude of the first eight segments of the seizure.</p>
-<section id="id15">
-<h3>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
-</dd>
-<dt>eeg_channel<span class="classifier">int</span></dt><dd><p>The index of the EEG channel to analyze.</p>
-</dd>
-<dt>segment_length<span class="classifier">int</span></dt><dd><p>Length of each segment in samples.</p>
-</dd>
-<dt>seizure_startpoint<span class="classifier">int</span></dt><dd><p>The start point of the seizure in samples.</p>
-</dd>
-<dt>seizure_endpoint<span class="classifier">float</span></dt><dd><p>The end time of the seizure in seconds.</p>
-</dd>
-<dt>debug<span class="classifier">bool, optional</span></dt><dd><p>If True, prints debug information (default is False).</p>
-</dd>
-</dl>
-</section>
-<section id="id16">
-<h3>Returns<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>dict</dt><dd><p>A dictionary containing the calculated EIA metric, including:
-- name: The name of the metric (‘eia’).
-- value: The calculated EIA value.
-- timepoints: A dictionary with the start and end points of the calculation.
-- unit: The unit of measurement (‘μV’).
-- description: A brief description of the metric.</p>
-</dd>
-</dl>
-</section>
-<section id="id17">
-<h3>Raises<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>ValueError</dt><dd><p>If the seizure segment is less than eight segments long.</p>
-</dd>
-</dl>
-</section>
-<section id="id18">
-<h3>Examples<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">eia_result</span> <span class="o">=</span> <span class="n">calculate_eia</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">eia_result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_mia">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_mia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_mia" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Midictal Amplitude (MIA) for a given EEG signal segment.</p>
-<p>The MIA represents the maximum average absolute amplitude of sequences of eight segments 
-within the seizure period.</p>
 <section id="id19">
 <h3>Parameters<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
@@ -516,9 +533,9 @@ within the seizure period.</p>
 <section id="id20">
 <h3>Returns<a class="headerlink" href="#id20" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
-<dt>dict</dt><dd><p>A dictionary containing the calculated MIA metric, including:
-- name: The name of the metric (‘mia’).
-- value: The calculated MIA value.
+<dt>dict</dt><dd><p>A dictionary containing the calculated EIA metric, including:
+- name: The name of the metric (‘eia’).
+- value: The calculated EIA value.
 - timepoints: A dictionary with the start and end points of the calculation.
 - unit: The unit of measurement (‘μV’).
 - description: A brief description of the metric.</p>
@@ -528,14 +545,67 @@ within the seizure period.</p>
 <section id="id21">
 <h3>Raises<a class="headerlink" href="#id21" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
-<dt>ValueError</dt><dd><p>If the seizure segment is less than eight segments long or if no valid amplitudes can be calculated.</p>
+<dt>ValueError</dt><dd><p>If the seizure segment is less than eight segments long.</p>
 </dd>
 </dl>
 </section>
 <section id="id22">
 <h3>Examples<a class="headerlink" href="#id22" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mia_result</span> <span class="o">=</span> <span class="n">calculate_mia</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eia_result</span> <span class="o">=</span> <span class="n">metric_eia</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">eia_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_mia">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_mia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_mia" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Midictal Amplitude (MIA) for a given EEG signal segment.</p>
+<p>The MIA represents the maximum average absolute amplitude of sequences of eight segments 
+within the seizure period.</p>
+<section id="id23">
+<h3>Parameters<a class="headerlink" href="#id23" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
+</dd>
+<dt>eeg_channel<span class="classifier">int</span></dt><dd><p>The index of the EEG channel to analyze.</p>
+</dd>
+<dt>segment_length<span class="classifier">int</span></dt><dd><p>Length of each segment in samples.</p>
+</dd>
+<dt>seizure_startpoint<span class="classifier">int</span></dt><dd><p>The start point of the seizure in samples.</p>
+</dd>
+<dt>seizure_endpoint<span class="classifier">float</span></dt><dd><p>The end time of the seizure in seconds.</p>
+</dd>
+<dt>debug<span class="classifier">bool, optional</span></dt><dd><p>If True, prints debug information (default is False).</p>
+</dd>
+</dl>
+</section>
+<section id="id24">
+<h3>Returns<a class="headerlink" href="#id24" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>dict</dt><dd><p>A dictionary containing the calculated MIA metric, including:
+- name: The name of the metric (‘mia’).
+- value: The calculated MIA value.
+- timepoints: A dictionary with the start and end points of the calculation.
+- unit: The unit of measurement (‘μV’).
+- description: A brief description of the metric.</p>
+</dd>
+</dl>
+</section>
+<section id="id25">
+<h3>Raises<a class="headerlink" href="#id25" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If the seizure segment is less than eight segments long or if no valid amplitudes can be calculated.</p>
+</dd>
+</dl>
+</section>
+<section id="id26">
+<h3>Examples<a class="headerlink" href="#id26" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mia_result</span> <span class="o">=</span> <span class="n">metric_mia</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mia_result</span><span class="p">)</span>
 </pre></div>
@@ -544,13 +614,13 @@ within the seizure period.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_msp">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_msp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_msp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_msp">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_msp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_msp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Maximum Sustained Power (MSP) of EEG signals within a specified seizure segment.</p>
 <p>The MSP represents the maximum average power over consecutive segments during a seizure, 
 calculated using the Fast Fourier Transform (FFT).</p>
-<section id="id23">
-<h3>Parameters<a class="headerlink" href="#id23" title="Permalink to this heading">¶</a></h3>
+<section id="id27">
+<h3>Parameters<a class="headerlink" href="#id27" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -571,8 +641,8 @@ and values as tuples defining the frequency range (e.g., {‘alpha’: (8, 12), 
 </dd>
 </dl>
 </section>
-<section id="id24">
-<h3>Returns<a class="headerlink" href="#id24" title="Permalink to this heading">¶</a></h3>
+<section id="id28">
+<h3>Returns<a class="headerlink" href="#id28" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated MSP metric, including:
 - name: The name of the metric (‘msp’).
@@ -583,18 +653,18 @@ and values as tuples defining the frequency range (e.g., {‘alpha’: (8, 12), 
 </dd>
 </dl>
 </section>
-<section id="id25">
-<h3>Raises<a class="headerlink" href="#id25" title="Permalink to this heading">¶</a></h3>
+<section id="id29">
+<h3>Raises<a class="headerlink" href="#id29" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>ValueError</dt><dd><p>If the seizure segment is less than eight segments long or if no valid power values can be calculated.</p>
 </dd>
 </dl>
 </section>
-<section id="id26">
-<h3>Examples<a class="headerlink" href="#id26" title="Permalink to this heading">¶</a></h3>
+<section id="id30">
+<h3>Examples<a class="headerlink" href="#id30" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frequency_bands</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;beta&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">msp_result</span> <span class="o">=</span> <span class="n">calculate_msp</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msp_result</span> <span class="o">=</span> <span class="n">metric_msp</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                            <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
 <span class="gp">... </span>                            <span class="n">frequency_bands</span><span class="o">=</span><span class="n">frequency_bands</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">msp_result</span><span class="p">)</span>
@@ -604,13 +674,13 @@ and values as tuples defining the frequency range (e.g., {‘alpha’: (8, 12), 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_psi">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_psi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_psi" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_psi">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_psi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_psi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Postictal Suppression Index (PSI) for a given EEG signal.</p>
 <p>The PSI quantifies the level of suppression in the EEG signal following a seizure, 
 comparing the amplitude of ictal (during the seizure) and non-ictal (after the seizure) segments.</p>
-<section id="id27">
-<h3>Parameters<a class="headerlink" href="#id27" title="Permalink to this heading">¶</a></h3>
+<section id="id31">
+<h3>Parameters<a class="headerlink" href="#id31" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -626,8 +696,8 @@ comparing the amplitude of ictal (during the seizure) and non-ictal (after the s
 </dd>
 </dl>
 </section>
-<section id="id28">
-<h3>Returns<a class="headerlink" href="#id28" title="Permalink to this heading">¶</a></h3>
+<section id="id32">
+<h3>Returns<a class="headerlink" href="#id32" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated PSI metric, including:
 - name: The name of the metric (‘psi’).
@@ -638,17 +708,17 @@ comparing the amplitude of ictal (during the seizure) and non-ictal (after the s
 </dd>
 </dl>
 </section>
-<section id="id29">
-<h3>Raises<a class="headerlink" href="#id29" title="Permalink to this heading">¶</a></h3>
+<section id="id33">
+<h3>Raises<a class="headerlink" href="#id33" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>ValueError</dt><dd><p>If calculated indices are out of bounds of the EEG signal.</p>
 </dd>
 </dl>
 </section>
-<section id="id30">
-<h3>Examples<a class="headerlink" href="#id30" title="Permalink to this heading">¶</a></h3>
+<section id="id34">
+<h3>Examples<a class="headerlink" href="#id34" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">psi_result</span> <span class="o">=</span> <span class="n">calculate_psi</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psi_result</span> <span class="o">=</span> <span class="n">metric_psi</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                          <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">psi_result</span><span class="p">)</span>
 </pre></div>
@@ -657,13 +727,13 @@ comparing the amplitude of ictal (during the seizure) and non-ictal (after the s
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_sei">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_sei</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asei</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_sei" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_sei">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_sei</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asei</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_sei" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Seizure Energy Index (SEI) based on the Average Seizure Energy Index (ASEI).</p>
 <p>This function computes the SEI for a specified EEG channel during a seizure event,
 utilizing the ASEI to quantify the energy associated with the seizure duration.</p>
-<section id="id31">
-<h3>Parameters<a class="headerlink" href="#id31" title="Permalink to this heading">¶</a></h3>
+<section id="id35">
+<h3>Parameters<a class="headerlink" href="#id35" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -683,8 +753,8 @@ utilizing the ASEI to quantify the energy associated with the seizure duration.<
 </dd>
 </dl>
 </section>
-<section id="id32">
-<h3>Returns<a class="headerlink" href="#id32" title="Permalink to this heading">¶</a></h3>
+<section id="id36">
+<h3>Returns<a class="headerlink" href="#id36" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated SEI metric, including:
 - name: The name of the metric (‘sei’).
@@ -695,18 +765,18 @@ utilizing the ASEI to quantify the energy associated with the seizure duration.<
 </dd>
 </dl>
 </section>
-<section id="id33">
-<h3>Raises<a class="headerlink" href="#id33" title="Permalink to this heading">¶</a></h3>
+<section id="id37">
+<h3>Raises<a class="headerlink" href="#id37" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>Exception</dt><dd><p>If an error occurs during the calculation, an error message is printed,
 and None is returned.</p>
 </dd>
 </dl>
 </section>
-<section id="id34">
-<h3>Examples<a class="headerlink" href="#id34" title="Permalink to this heading">¶</a></h3>
+<section id="id38">
+<h3>Examples<a class="headerlink" href="#id38" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sei_result</span> <span class="o">=</span> <span class="n">calculate_sei</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sei_result</span> <span class="o">=</span> <span class="n">metric_sei</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">segment_length</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">asei</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sei_result</span><span class="p">)</span>
@@ -716,12 +786,12 @@ and None is returned.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_ttpc">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_ttpc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_consecutive_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coh_startpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coh_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_ttpc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_ttpc">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_ttpc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_consecutive_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coh_startpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coh_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_ttpc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Time to Peak Coherence (TTPC) during a seizure segment.</p>
 <p>TTPC is defined as the time taken to reach the peak coherence value between two EEG channels.</p>
-<section id="id35">
-<h3>Parameters<a class="headerlink" href="#id35" title="Permalink to this heading">¶</a></h3>
+<section id="id39">
+<h3>Parameters<a class="headerlink" href="#id39" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -743,8 +813,8 @@ and None is returned.</p>
 </dd>
 </dl>
 </section>
-<section id="id36">
-<h3>Returns<a class="headerlink" href="#id36" title="Permalink to this heading">¶</a></h3>
+<section id="id40">
+<h3>Returns<a class="headerlink" href="#id40" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated TTPC metric, including:
 - name: The name of the metric (‘ttpc’).
@@ -755,17 +825,17 @@ and None is returned.</p>
 </dd>
 </dl>
 </section>
-<section id="id37">
-<h3>Raises<a class="headerlink" href="#id37" title="Permalink to this heading">¶</a></h3>
+<section id="id41">
+<h3>Raises<a class="headerlink" href="#id41" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>ValueError</dt><dd><p>If the coherence startpoint or endpoint values are invalid or cannot be calculated.</p>
 </dd>
 </dl>
 </section>
-<section id="id38">
-<h3>Examples<a class="headerlink" href="#id38" title="Permalink to this heading">¶</a></h3>
+<section id="id42">
+<h3>Examples<a class="headerlink" href="#id42" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data for 2 channels</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ttp_result</span> <span class="o">=</span> <span class="n">calculate_ttpc</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ttp_result</span> <span class="o">=</span> <span class="n">metric_ttpc</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_consecutive_segments</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ttp_result</span><span class="p">)</span>
 </pre></div>
@@ -774,13 +844,13 @@ and None is returned.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.calculate_ttpp">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">calculate_ttpp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msp_startpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msp_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.calculate_ttpp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ectmetrics.metrics.metric_ttpp">
+<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metric_ttpp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg_signals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eeg_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_startpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency_bands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msp_startpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msp_endpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metric_ttpp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Time to Peak Power (TTPP) for EEG signals during a seizure.</p>
 <p>TTPP is the time taken to reach the peak power during a seizure event, 
 calculated based on the Maximum Sustained Power (MSP).</p>
-<section id="id39">
-<h3>Parameters<a class="headerlink" href="#id39" title="Permalink to this heading">¶</a></h3>
+<section id="id43">
+<h3>Parameters<a class="headerlink" href="#id43" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>eeg_signals<span class="classifier">numpy.ndarray</span></dt><dd><p>A 2D numpy array containing the EEG signals, where each row corresponds to a different channel.</p>
 </dd>
@@ -805,8 +875,8 @@ and values as tuples defining the frequency range (e.g., {‘alpha’: (8, 12), 
 </dd>
 </dl>
 </section>
-<section id="id40">
-<h3>Returns<a class="headerlink" href="#id40" title="Permalink to this heading">¶</a></h3>
+<section id="id44">
+<h3>Returns<a class="headerlink" href="#id44" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>dict</dt><dd><p>A dictionary containing the calculated TTPP metric, including:
 - name: The name of the metric (‘ttpp’).
@@ -817,79 +887,21 @@ and values as tuples defining the frequency range (e.g., {‘alpha’: (8, 12), 
 </dd>
 </dl>
 </section>
-<section id="id41">
-<h3>Raises<a class="headerlink" href="#id41" title="Permalink to this heading">¶</a></h3>
+<section id="id45">
+<h3>Raises<a class="headerlink" href="#id45" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt>ValueError</dt><dd><p>If the MSP start point or endpoint values are invalid or if an error occurs during the MSP calculation.</p>
 </dd>
 </dl>
 </section>
-<section id="id42">
-<h3>Examples<a class="headerlink" href="#id42" title="Permalink to this heading">¶</a></h3>
+<section id="id46">
+<h3>Examples<a class="headerlink" href="#id46" title="Permalink to this heading">¶</a></h3>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eeg_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Simulated EEG data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frequency_bands</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;beta&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ttpp_result</span> <span class="o">=</span> <span class="n">calculate_ttpp</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ttpp_result</span> <span class="o">=</span> <span class="n">metric_ttpp</span><span class="p">(</span><span class="n">eeg_data</span><span class="p">,</span> <span class="n">eeg_channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
 <span class="gp">... </span>                              <span class="n">segment_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">seizure_startpoint</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">seizure_endpoint</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
 <span class="gp">... </span>                              <span class="n">frequency_bands</span><span class="o">=</span><span class="n">frequency_bands</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ttpp_result</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ectmetrics.metrics.metrics">
-<span class="sig-prename descclassname"><span class="pre">ectmetrics.metrics.</span></span><span class="sig-name descname"><span class="pre">metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eeg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seizure_duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ectmetrics.metrics.metrics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Main function to calculate various seizure metrics based on the provided EEG data.</p>
-<p>This function computes specified seizure metrics for given EEG signals, allowing customization 
-of segment length, metrics to calculate, and frequency bands. It validates inputs and 
-organizes the computation of metrics based on the specified list.</p>
-<section id="id43">
-<h3>Parameters<a class="headerlink" href="#id43" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>eeg<span class="classifier">dict</span></dt><dd><p>A dictionary containing EEG data with the following keys:
-- ‘signals’: A numpy array of EEG signals.
-- ‘sampling_frequency’: The sampling frequency of the EEG signals in Hz.
-- ‘timepoints’: A dictionary containing ‘seizure_startpoint’ and ‘seizure_endpoint’.</p>
-</dd>
-<dt>segment_length<span class="classifier">int, optional</span></dt><dd><p>Length of segments for calculation (default is set to DEFAULTS[‘segment_length’]).</p>
-</dd>
-<dt>metrics_list<span class="classifier">list, optional</span></dt><dd><p>List specifying which metrics to calculate. It can contain metric names (strings) or dictionaries 
-that specify the metric name and parameters.</p>
-</dd>
-<dt>seizure_duration<span class="classifier">int, optional</span></dt><dd><p>Duration of the seizure (not currently used but may be relevant for future metrics).</p>
-</dd>
-<dt>frequency_bands<span class="classifier">dict, optional</span></dt><dd><p>Frequency bands for calculations (default includes common EEG bands).</p>
-</dd>
-<dt>debug<span class="classifier">bool, optional</span></dt><dd><p>If True, prints debug information to aid in tracing the computation (default is False).</p>
-</dd>
-</dl>
-</section>
-<section id="id44">
-<h3>Returns<a class="headerlink" href="#id44" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>results<span class="classifier">list</span></dt><dd><p>A list of dictionaries containing calculated metrics with the following structure:
-- name: The name of the metric.
-- value: The calculated value of the metric.
-- timepoints: A dictionary containing relevant timepoints.
-- unit: The unit of measurement.
-- description: A brief description of the metric.</p>
-</dd>
-</dl>
-</section>
-<section id="id45">
-<h3>Raises<a class="headerlink" href="#id45" title="Permalink to this heading">¶</a></h3>
-<dl class="simple">
-<dt>ValueError</dt><dd><p>If any input data is invalid or if metrics cannot be calculated due to missing data.</p>
-</dd>
-</dl>
-</section>
-<section id="id46">
-<h3>Examples<a class="headerlink" href="#id46" title="Permalink to this heading">¶</a></h3>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ectmetrics.eeg</span> <span class="kn">import</span> <span class="n">generate</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">eeg</span> <span class="o">=</span> <span class="n">generate</span><span class="p">(</span><span class="n">signal_duration</span> <span class="o">=</span> <span class="mi">28</span><span class="p">,</span> <span class="n">seizure_duration</span> <span class="o">=</span> <span class="mi">21</span><span class="p">,</span> <span class="n">sampling_frequency</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result_metrics</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">(</span><span class="n">eeg</span><span class="p">,</span> <span class="n">metrics_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;asei&#39;</span><span class="p">,</span> <span class="s1">&#39;sei&#39;</span><span class="p">],</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result_metrics</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -908,7 +920,7 @@ that specify the metric name and parameters.</p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#">Modules</a><ul>
 <li><a class="reference internal" href="#module-ectmetrics.eeg">eeg</a><ul>
 <li><a class="reference internal" href="#ectmetrics.eeg.DEFAULTS"><code class="docutils literal notranslate"><span class="pre">DEFAULTS</span></code></a></li>
 <li><a class="reference internal" href="#ectmetrics.eeg.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
@@ -917,16 +929,16 @@ that specify the metric name and parameters.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-ectmetrics.metrics">metrics</a><ul>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_asei"><code class="docutils literal notranslate"><span class="pre">calculate_asei()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_coh"><code class="docutils literal notranslate"><span class="pre">calculate_coh()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_eia"><code class="docutils literal notranslate"><span class="pre">calculate_eia()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_mia"><code class="docutils literal notranslate"><span class="pre">calculate_mia()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_msp"><code class="docutils literal notranslate"><span class="pre">calculate_msp()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_psi"><code class="docutils literal notranslate"><span class="pre">calculate_psi()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_sei"><code class="docutils literal notranslate"><span class="pre">calculate_sei()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_ttpc"><code class="docutils literal notranslate"><span class="pre">calculate_ttpc()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.calculate_ttpp"><code class="docutils literal notranslate"><span class="pre">calculate_ttpp()</span></code></a></li>
-<li><a class="reference internal" href="#ectmetrics.metrics.metrics"><code class="docutils literal notranslate"><span class="pre">metrics()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric"><code class="docutils literal notranslate"><span class="pre">metric()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_asei"><code class="docutils literal notranslate"><span class="pre">metric_asei()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_coh"><code class="docutils literal notranslate"><span class="pre">metric_coh()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_eia"><code class="docutils literal notranslate"><span class="pre">metric_eia()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_mia"><code class="docutils literal notranslate"><span class="pre">metric_mia()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_msp"><code class="docutils literal notranslate"><span class="pre">metric_msp()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_psi"><code class="docutils literal notranslate"><span class="pre">metric_psi()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_sei"><code class="docutils literal notranslate"><span class="pre">metric_sei()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_ttpc"><code class="docutils literal notranslate"><span class="pre">metric_ttpc()</span></code></a></li>
+<li><a class="reference internal" href="#ectmetrics.metrics.metric_ttpp"><code class="docutils literal notranslate"><span class="pre">metric_ttpp()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -937,12 +949,17 @@ that specify the metric name and parameters.</p>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="index.html"
-                          title="previous chapter">ECTMetrics’s Documentation</a></p>
+                          title="previous chapter">ECTMetrics</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="contact.html"
+                          title="next chapter">Contact</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/eeg.rst.txt"
+      <li><a href="_sources/modules.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -970,10 +987,13 @@ that specify the metric name and parameters.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="ECTMetrics’s Documentation"
+          <a href="contact.html" title="Contact"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="ECTMetrics"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">ECTMetrics  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Usage</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Modules</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
