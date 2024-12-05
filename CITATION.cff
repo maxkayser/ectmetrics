@@ -1,11 +1,9 @@
 cff-version: 1.1.0
 message: "If you use this software, please cite it as below."
-title: "ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy"
-version: "1.0.0"
-date-released: "2024-12-05"
 authors:
-  - family-names: "Kayser"
-    given-names: "Max"
-    orcid: "https://orcid.org/0000-0002-8589-4415"
-license: "CC-BY-NC-4.0"
-url: "https://github.com/maxkayser/ectmetrics"
+- family-names: Kayser
+  given-names: Max
+orcid: https://orcid.org/0000-0002-8589-4415
+title: "ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy"
+version: 1.0.0
+date-released: 2024-12-05
