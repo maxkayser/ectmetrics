@@ -41,12 +41,45 @@
             
   <section id="ectmetrics">
 <h1>ECTMetrics<a class="headerlink" href="#ectmetrics" title="Permalink to this heading">¶</a></h1>
+<p>ECTMetrics is a Python library for analyzing EEG signals, particularly focusing on
+electroconvulsive therapy (ECT) seizure metrics. It provides functionalities to
+generate synthetic EEG signals, visualize them, and calculate various metrics related
+to seizure activity.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Generate synthetic ECT-specific EEG signals with customizable parameters.</p></li>
+<li><p>Visualize EEG signals for better understanding and analysis.</p></li>
+<li><p>Import EEG data from GPD (Elektrika Inc®). <em>currently under development</em></p></li>
+<li><p>Calculate various <a class="reference external" href="modules.html#ectmetrics.metric.metric">ECT seizure metrics</a> including:</p>
+<ul>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_sei">Seizure Energy Index (SEI)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_asei">Average Seizure Energy Index (ASEI)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_psi">Postictal Suppression Index (PSI)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_eia">Earlyictal Amplitude (EIA)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_mia">Midictal Amplitude (MIA)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_msp">Maximum Sustained Power (MSP)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_ttpp">Time to Peak Power (TTPP)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_coh">Maximum Sustained Coherence (COH)</a></p></li>
+<li><p><a class="reference external" href="modules.html#ectmetrics.metric.metric_ttpc">Time to Peak Coherence (TTPC)</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ECTMetrics is under active development, and contributions are welcome.
+If you encounter issues or have suggestions for improvements, please consult
+the <cite>contact</cite> section or open an issue on our repository.</p>
+</div>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules.html#module-ectmetrics.eeg">eeg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules.html#module-ectmetrics.metrics">metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-ectmetrics.metric">metric</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
@@ -57,6 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 </div>
+</section>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
@@ -77,7 +111,11 @@
   <div>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">ECTMetrics</a></li>
+<li><a class="reference internal" href="#">ECTMetrics</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
