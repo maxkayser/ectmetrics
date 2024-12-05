@@ -22,7 +22,8 @@ Alternatively, you can use the following BibTeX entry if you're using a referenc
   url          = {https://github.com/maxkayser/ectmetrics},
   orcid        = {https://orcid.org/0000-0002-8589-4415},
   note         = {Medical Psychology - Brainstimulation Group},
-  version      = {1.0}
+  version      = {1.0},
+  doi          = {10.5281/zenodo.14285754}
 }
 ```
 
@@ -32,15 +33,18 @@ Alternatively, you can use the following BibTeX entry if you're using a referenc
 
 APA Style
 ```
-Kayser, M. (2024). ECTMetrics: A python library for calculating seizure quality indices in electroconvulsive therapy. GitHub repository. Available at: https://github.com/maxkayser/ectmetrics
+Kayser, M. (2024). ECTMetrics: A python library for calculating seizure quality indices in electroconvulsive therapy. GitHub repository. Available at: https://github.com/maxkayser/ectmetrics  
+doi: https://doi.org/10.5281/zenodo.14285754
 ```
 
 MLA Style
 ```
-Kayser, Max. “ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy.” GitHub, 2024, https://github.com/maxkayser/ectmetrics.
+Kayser, Max. “ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy.” GitHub, 2024, https://github.com/maxkayser/ectmetrics.  
+doi: https://doi.org/10.5281/zenodo.14285754
 ```
 
 Chicago Style
 ```
-Kayser, Max. 2024. “ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy” GitHub Repository. https://github.com/maxkayser/ectmetrics.
+Kayser, Max. 2024. “ECTMetrics: A Python Library for Calculating Seizure Quality Indices in Electroconvulsive Therapy” GitHub Repository. https://github.com/maxkayser/ectmetrics.  
+doi: https://doi.org/10.5281/zenodo.14285754
 ```
