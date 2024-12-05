@@ -10,9 +10,9 @@ eeg
    :members:
    
 
-metrics
+metric
 ------------
 
-.. currentmodule:: ectmetrics.metrics
-.. automodule:: ectmetrics.metrics
+.. currentmodule:: ectmetrics.metric
+.. automodule:: ectmetrics.metric
    :members:
