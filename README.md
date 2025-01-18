@@ -78,6 +78,10 @@ For more details, please refer to the [contact information](CONTACT.md) file.
 
 For citation information, please refer to the [citations](CITATIONS.md) file.
 
+## Disclaimer
+
+This toolbox is intended for research purposes only. It is neither designed nor certified for medical use (e.g., treatment of humans or living beings, clinical decision-making). Users are advised to exercise caution and ensure compliance with all applicable laws, regulations, and ethical guidelines when utilizing this toolbox. The authors assume no responsibility for any misuse of the software.
+
 ## Acknowledgements
 
 The authors sincerely acknowledge the access granted to the [Bonna computing cluster](https://www.hpc.uni-bonn.de/en) hosted by the [University of Bonn](https://www.uni-bonn.de/en) and the support provided by its High-Performance Computing & Analytics Lab. We extend special thanks to Ralf Berninger for his invaluable technical insights and assistance regarding the Thymatron® System IV stimulation device. We also express our deep gratitude to Jesse Pavel for the development and ongoing enhancement of the ECT data collection tool, [GPD](https://github.com/elektrika-inc/GPD-wiki).
