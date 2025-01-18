@@ -78,17 +78,17 @@ For more details, please refer to the [contact information](CONTACT.md) file.
 
 For citation information, please refer to the [citations](CITATIONS.md) file.
 
-## Disclaimer
-
-The ECTMetrics is intended for research purposes only and does not constitute a medical product. It is neither designed nor certified for medical use (e.g., treatment of humans or living beings, clinical decision-making). The toolbox is provided "as is", without warranty of any kind, express or implied, including, but not limited to, warranties of merchantability, fitness for a particular purpose, or noninfringement.
-
-The authors assume no responsibility or legal liability for any misuse of the toolbox. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the toolbox or its use or other dealings. Users are advised to exercise caution and ensure compliance with all applicable laws, regulations, and ethical guidelines when utilizing this toolbox.
-
 ## Acknowledgements
 
 The authors sincerely acknowledge the access granted to the [Bonna computing cluster](https://www.hpc.uni-bonn.de/en) hosted by the [University of Bonn](https://www.uni-bonn.de/en) and the support provided by its High-Performance Computing & Analytics Lab. We extend special thanks to Ralf Berninger for his invaluable technical insights and assistance regarding the Thymatron® System IV stimulation device. We also express our deep gratitude to Jesse Pavel for the development and ongoing enhancement of the ECT data collection tool, [GPD](https://github.com/elektrika-inc/GPD-wiki).
 
 All acknowledgments are associated with research that was partially funded by the [BONFOR](https://www.medfak.uni-bonn.de/de/forschung/forschungsfoerderung/bonfor/bonfor-forschungsfoerderprogramm) and the FKS study support program [2021-FKS-12] of the [University Hospital Bonn](https://www.ukbonn.de/). This research did not receive any additional grants from funding agencies in the public, commercial, or not-for-profit sectors.
+
+## Disclaimer
+
+The ECTMetrics is intended for research purposes only and does not constitute a medical product. It is neither designed nor certified for medical use (e.g., treatment of humans or living beings, clinical decision-making). The toolbox is provided "as is", without warranty of any kind, express or implied, including, but not limited to, warranties of merchantability, fitness for a particular purpose, or noninfringement.
+
+The authors assume no responsibility or legal liability for any misuse of the toolbox. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the toolbox or its use or other dealings. Users are advised to exercise caution and ensure compliance with all applicable laws, regulations, and ethical guidelines when utilizing this toolbox.
 
 ## Running Tests
 
