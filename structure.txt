@@ -25,11 +25,12 @@ EctMetrics
 │   └── source/
 │
 ├── CITATIONS.md                 		          # Informations on how to cite this repository
-├── CONTACT.md                 		              # Contact information
-├── LICENSE                 		                  # License details
+├── CONTACT.md                 		            # Contact information
+├── DISCLAIMER.md                 		        # Legal disclaimer
+├── LICENSE                 		              # License details
 ├── pyproject.toml                            # Configuration for build system and project metadata
-├── README.md                 		              # Project description and instructions
-├── requirements.txt          		              # Dependencies for the project
+├── README.md                 		            # Project description and instructions
+├── requirements.txt          		            # Dependencies for the project
 ├── setup.py                  		        	  # Setup script for installation
-├── structure.txt                 		          # Project structure
+├── structure.txt                 		        # Project structure
 └── .gitignore                		        	  # Files and directories to be ignored by Git
