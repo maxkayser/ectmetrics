@@ -1,3 +1,5 @@
+<img src="assets/ECTMetrics_logo.png" width="100">
+
 # ECTMetrics
 
 ECTMetrics is a Python library for analyzing EEG signals, particularly focusing on electroconvulsive therapy (ECT) seizure metrics. It provides functionalities to generate synthetic EEG signals, visualize them, and calculate various metrics related to seizure activity.
