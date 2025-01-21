@@ -29,5 +29,5 @@ setup(
         'Topic :: Scientific/Engineering :: Medical Science Apps.',
     ],
     python_requires='>=3.6',
-    keywords='ECT, EEG, seizure, metrics, signal processing, medical',
+    keywords='ECT, electroconvulsive therapy, seizure, metrics, signal processing, seizure analysis, EEG, electroencephalography, suppression, medical, biomedical',
 )
