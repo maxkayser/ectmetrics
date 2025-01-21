@@ -7,6 +7,7 @@ Modules:
     - eeg: Contains functions for EEG signal processing.
     - metric: Contains functions for ECT seizure quality metric calculations.
 """
+__version__ = '0.1.0'
 
 # Importing necessary modules
 from .eeg import *
