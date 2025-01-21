@@ -1,0 +1,10 @@
+# Changelog
+
+## [1.0.1] - 2025
+### Added
+- Added a legal disclaimer and a toolbox logo.
+
+
+## [1.0.0] - 2024-12-05
+### Initial Release
+- Initial stable version of the ECTMetrics toolbox.
