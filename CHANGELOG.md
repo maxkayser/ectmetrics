@@ -4,7 +4,8 @@
 ### Added
 - Added a legal disclaimer.
 - Added a toolbox logo.
-
+### Fixed
+- Bug fixes and performance improvements.
 
 ## [1.0.0] - 2024-12-05
 ### Initial Release
