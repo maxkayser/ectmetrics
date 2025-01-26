@@ -4,6 +4,7 @@
 ### Added
 - Added a legal disclaimer.
 - Added a toolbox logo.
+- Added a changelog.
 - Supplemented the documentation with additional details.
 ### Fixed
 - Bug fixes and performance improvements.
