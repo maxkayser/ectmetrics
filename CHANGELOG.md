@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.1] - 2025
+## [1.0.1] - 2025-01-26
 ### Added
 - Added a legal disclaimer.
 - Added a toolbox logo.
