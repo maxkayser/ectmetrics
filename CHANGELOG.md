@@ -2,7 +2,8 @@
 
 ## [1.0.1] - 2025
 ### Added
-- Added a legal disclaimer and a toolbox logo.
+- Added a legal disclaimer.
+- Added a toolbox logo.
 
 
 ## [1.0.0] - 2024-12-05
