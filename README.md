@@ -1,3 +1,7 @@
+![Top Language](https://img.shields.io/github/languages/top/maxkayser/ectmetrics.svg)
+![GitHub release](https://img.shields.io/github/v/release/maxkayser/ectmetrics.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.1038/s41598-025-88238-3.svg)](https://doi.org/10.1038/s41598-025-88238-3)
+
 <img src="assets/ECTMetrics_logo.png" width="100">
 
 # ECTMetrics
