@@ -331,7 +331,7 @@ def metric_eia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, sei
         The index of the EEG channel to analyze.
     segment_length : int
         Length of each segment in samples.
-    seizure_startpoint : int
+    seizure_startpoint : float
         The start point of the seizure in samples.
     seizure_endpoint : float
         The end time of the seizure in seconds.
@@ -418,7 +418,7 @@ def metric_mia(eeg_signals, eeg_channel, segment_length, seizure_startpoint, sei
         The index of the EEG channel to analyze.
     segment_length : int
         Length of each segment in samples.
-    seizure_startpoint : int
+    seizure_startpoint : float
         The start point of the seizure in samples.
     seizure_endpoint : float
         The end time of the seizure in seconds.
@@ -518,7 +518,7 @@ def metric_msp(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
         The sampling frequency of the signal in Hz.
     segment_length : int
         Length of each segment in samples.
-    seizure_startpoint : int
+    seizure_startpoint : float
         The start point of the seizure in samples.
     seizure_endpoint : float
         The end time of the seizure in seconds.
@@ -635,10 +635,10 @@ def metric_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
         The sampling frequency of the signal in Hz.
     segment_length : int
         Length of each segment in samples.
-    seizure_startpoint : int
-        The start point of the seizure in samples.
+    seizure_startpoint : float
+        The start index of the seizure in samples.
     seizure_endpoint : float
-        The end time of the seizure in seconds.
+        The end index of the seizure in seconds.
     frequency_bands : dict
         A dictionary containing frequency bands for FFT power calculation, with keys as band names 
         and values as tuples defining the frequency range (e.g., {'alpha': (8, 12), 'beta': (12, 30), 'total': (0, 40)}).
@@ -719,7 +719,7 @@ def metric_ttpp(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
         return np.nan
 
 
-def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug=False):
+def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, n_consecutive_segments, debug=False):
  
     """
     Calculate the Maximum Sustained Coherence (COH) between two EEG channels during a seizure.
@@ -737,8 +737,10 @@ def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
         The sampling frequency of the EEG signals in Hz.
     segment_length : int
         Length of each segment in samples.
-    seizure_startpoint : int
+    seizure_startpoint : float
         The start index of the seizure segment in samples.
+    seizure_endpoint : float
+        The end index of the seizure in seconds.
     n_consecutive_segments : int
         Number of consecutive segments to consider for coherence calculation.
     debug : bool, optional
@@ -780,12 +782,12 @@ def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
     
     
     # Check signal length
-    if (n_consecutive_segments * segment_length) > len(eeg_signals[eeg_channel[0]][seizure_startpoint:]):
+    if (n_consecutive_segments * segment_length) > len(eeg_signals[eeg_channel[0]][seizure_startpoint:seizure_endpoint]):
         raise ValueError("Signal is less than {} segments long.".format(n_consecutive_segments))
 
     # Loop through consecutive segments
     i = 0
-    while (i + n_consecutive_segments) * segment_length <= len(eeg_signals[eeg_channel[0]][seizure_startpoint:]):
+    while (i + n_consecutive_segments) * segment_length <= len(eeg_signals[eeg_channel[0]][seizure_startpoint:seizure_endpoint]):
         # Get COH signal segments for both channels
         eeg_signal_channel_1 = eeg_signals[eeg_channel[0]][seizure_startpoint + i * segment_length: seizure_startpoint + (i + n_consecutive_segments) * segment_length]
         eeg_signal_channel_2 = eeg_signals[eeg_channel[1]][seizure_startpoint + i * segment_length: seizure_startpoint + (i + n_consecutive_segments) * segment_length]
@@ -836,7 +838,7 @@ def metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, sei
         raise ValueError("COH cannot be calculated.")
         
 
-def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, coh_startpoint=None, coh_endpoint=None, debug=False):
+def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, n_consecutive_segments, coh_startpoint=None, coh_endpoint=None, debug=False):
 
     """
     Calculate the Time to Peak Coherence (TTPC) during a seizure segment.
@@ -853,8 +855,10 @@ def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
         The sampling frequency of the EEG signals in Hz.
     segment_length : int
         Length of each segment in samples.
-    seizure_startpoint : int
+    seizure_startpoint : float
         The start index of the seizure segment in samples.
+    seizure_endpoint : float
+        The end index of the seizure in seconds.
     n_consecutive_segments : int
         Number of consecutive segments to consider for coherence calculation.
     coh_startpoint : int, optional
@@ -891,7 +895,7 @@ def metric_ttpc(eeg_signals, eeg_channel, sampling_frequency, segment_length, se
     
         # Validate coh_startpoint and coh_endpoint
         if (coh_startpoint is None or coh_endpoint is None or np.isnan(coh_startpoint) or np.isnan(coh_endpoint)):
-            coh_result = metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, n_consecutive_segments, debug)
+            coh_result = metric_coh(eeg_signals, eeg_channel, sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, n_consecutive_segments, debug)
  
             coh_startpoint = coh_result['timepoints']['startpoint']
             coh_endpoint = coh_result['timepoints']['endpoint']
@@ -1165,7 +1169,7 @@ def metric(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, se
             #metric['n_consecutive_segments'] = 8
             #metric['channel'] = [0, 1]
             
-            results.append(metric_coh(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['options']['n_consecutive_segments'], debug))
+            results.append(metric_coh(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, metric['options']['n_consecutive_segments'], debug))
 
         elif metric_name == 'ttpc':
         
@@ -1184,6 +1188,6 @@ def metric(eeg, segment_length=DEFAULTS['segment_length'], metrics_list=None, se
                         coh_startpoint = None
                         coh_endpoint = None
                         
-            results.append(metric_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, metric['options']['n_consecutive_segments'], debug))
+            results.append(metric_ttpc(eeg_signals, metric['channels'], sampling_frequency, segment_length, seizure_startpoint, seizure_endpoint, metric['options']['n_consecutive_segments'], debug))
 
     return results
